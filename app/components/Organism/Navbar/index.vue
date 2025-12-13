@@ -5,48 +5,90 @@ const route = useRoute();
 const items = computed<NavigationMenuItem[]>(() => {
   return [
     {
-      label: "Docs",
-      to: "/docs/getting-started",
-      active: route.path.startsWith("/docs/getting-started"),
+      label: "Beranda",
+      to: "/",
+      class: "text-base",
     },
     {
-      label: "Components",
-      to: "/docs/components",
-      active: route.path.startsWith("/docs/components"),
+      label: "Profil",
+      active: route.path.startsWith("/profil"),
+      class: "text-base",
+      children: [
+        {
+          label: "Profil STIE",
+          description: "Profil Singkat Perguruan Tinggi",
+          icon: "i-lucide-house",
+          to: "/profil/tentang",
+        },
+        {
+          label: "Visi dan Misi",
+          icon: "i-lucide-eye",
+          to: "/profil/visi-misi",
+        },
+        {
+          label: "Struktur Organisasi",
+          icon: "i-lucide-info",
+          to: "/profil/struktur-organisasi",
+        },
+        {
+          label: "Tenaga Pendidik",
+          icon: "i-lucide-users",
+          to: "/profil/tenaga-pendidik",
+        },
+      ],
     },
     {
-      label: "Figma",
-      to: "https://go.nuxt.com/figma-ui",
-      target: "_blank",
+      label: "Akademik",
+      active: route.path.startsWith("/program-studi"),
+      class: "text-base",
+      children: [
+        {
+          label: "S1 Manajemen",
+          icon: "i-lucide-house",
+          to: "/program-studi/manajemen",
+        },
+        {
+          label: "S1 Akuntansi",
+          icon: "i-lucide-eye",
+          to: "/program-studi/akuntansi",
+        },
+      ],
     },
     {
-      label: "Releases",
-      to: "https://github.com/nuxt/ui/releases",
-      target: "_blank",
+      label: "Berita",
+      to: "/berita",
+      active: route.path.startsWith("/berita"),
+      class: "text-base",
+    },
+    {
+      label: "Kemahasiswaan",
+      to: "/kemahasiswaan",
+      active: route.path.startsWith("/kemahasiswaan"),
+      class: "text-base",
     },
   ];
 });
+
+const navigationMenuUIClass = {
+  list: "gap-x-6",
+  linkLabel: "text-neutral-100 font-semibold",
+  childList: "p-5",
+  childLinkIcon: "mr-3 mt-1",
+};
 </script>
 
 <template>
-  <UHeader :ui="{ root: 'bg-neutral-100' }">
+  <UHeader :ui="{ root: 'backdrop-filter-none !bg-secondary-500' }">
     <template #title>
       <AtomicLogo />
     </template>
-    <UNavigationMenu :items="items" />
     <template #right>
-      <UColorModeButton />
-
-      <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
-        <UButton
-          color="neutral"
-          variant="ghost"
-          to="https://github.com/nuxt/ui"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-        />
-      </UTooltip>
+      <UNavigationMenu
+        :ui="navigationMenuUIClass"
+        :items="items"
+        content-orientation="vertical"
+        color="secondary"
+      />
     </template>
   </UHeader>
 </template>
