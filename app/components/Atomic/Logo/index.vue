@@ -1,7 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+withDefaults(
+  defineProps<{
+    size?: number;
+  }>(),
+  {
+    size: 40,
+  }
+);
+</script>
 
 <template>
-  <NuxtImg src="/img/logo-stie-tamansiswa.webp" height="40" />
+  <img src="/img/logo-stie-tamansiswa.webp" :style="{ height: `${size}px` }" />
 </template>
 
 <style scoped></style>
