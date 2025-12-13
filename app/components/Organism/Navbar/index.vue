@@ -30,11 +30,6 @@ const items = computed<NavigationMenuItem[]>(() => {
           icon: "i-lucide-info",
           to: "/profil/struktur-organisasi",
         },
-        {
-          label: "Tenaga Pendidik",
-          icon: "i-lucide-users",
-          to: "/profil/tenaga-pendidik",
-        },
       ],
     },
     {

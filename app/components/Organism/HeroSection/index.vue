@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const items = [
-  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?q=80&w=2070&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2086&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop",
 ];
 </script>
 
 <template>
-  <div class="relative h-screen w-full">
+  <div class="relative h-[50vh] md:h-[70vh] w-full">
     <UCarousel
       v-slot="{ item }"
       :items="items"
