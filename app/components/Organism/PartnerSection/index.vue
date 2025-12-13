@@ -1,26 +1,35 @@
 <script setup lang="ts">
 const partners = [
-  { name: "Partner 1", logo: "https://placehold.co/150x50?text=Partner+1" },
-  { name: "Partner 2", logo: "https://placehold.co/150x50?text=Partner+2" },
-  { name: "Partner 3", logo: "https://placehold.co/150x50?text=Partner+3" },
-  { name: "Partner 4", logo: "https://placehold.co/150x50?text=Partner+4" },
-  { name: "Partner 5", logo: "https://placehold.co/150x50?text=Partner+5" },
-  { name: "Partner 6", logo: "https://placehold.co/150x50?text=Partner+6" },
+  {
+    name: "Business Insider",
+    logo: "https://placehold.co/200x80?text=Business+Insider",
+  },
+  {
+    name: "The Jakarta Post",
+    logo: "https://placehold.co/200x80?text=The+Jakarta+Post",
+  },
+  { name: "Metro TV", logo: "https://placehold.co/200x80?text=Metro+TV" },
+  { name: "Astra", logo: "https://placehold.co/200x80?text=Astra" },
+  {
+    name: "Djarum Group",
+    logo: "https://placehold.co/200x80?text=Djarum+Group",
+  },
+  { name: "Kompas", logo: "https://placehold.co/200x80?text=Kompas" },
 ];
 </script>
 
 <template>
-  <div class="py-12 bg-white border-b border-gray-100">
-    <div class="container mx-auto px-4 mb-6">
+  <div class="py-10 bg-white border-b border-gray-100">
+    <div class="container mx-auto px-4 mb-9">
       <h2
-        class="text-center text-gray-500 font-medium uppercase tracking-wider text-sm"
+        class="text-center text-gray-500 font-medium uppercase tracking-wider text-md"
       >
         Partner Kami
       </h2>
     </div>
     <div class="relative flex overflow-x-hidden group">
       <div
-        class="animate-marquee whitespace-nowrap flex items-center space-x-16 px-8"
+        class="animate-marquee whitespace-nowrap flex items-center space-x-20 px-8"
       >
         <div
           v-for="(partner, index) in [...partners, ...partners, ...partners]"
@@ -30,13 +39,13 @@ const partners = [
           <img
             :src="partner.logo"
             :alt="partner.name"
-            class="h-12 w-auto object-contain"
+            class="h-16 w-auto object-contain"
           />
         </div>
       </div>
 
       <div
-        class="absolute top-0 animate-marquee2 whitespace-nowrap flex items-center space-x-16 px-8"
+        class="absolute top-0 animate-marquee2 whitespace-nowrap flex items-center space-x-20 px-8"
       >
         <div
           v-for="(partner, index) in [...partners, ...partners, ...partners]"
@@ -46,7 +55,7 @@ const partners = [
           <img
             :src="partner.logo"
             :alt="partner.name"
-            class="h-12 w-auto object-contain"
+            class="h-16 w-auto object-contain"
           />
         </div>
       </div>

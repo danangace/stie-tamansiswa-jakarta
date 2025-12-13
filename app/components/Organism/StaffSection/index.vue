@@ -12,7 +12,7 @@ const staff = [
     name: "Dr. Nama Wakil Rektor, M.Si.",
     position: "Wakil Rektor I",
     image:
-      "https://images.unsplash.com/photo-1573496359-136d47552640?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=800&auto=format&fit=crop",
     greeting:
       "Pendidikan adalah kunci kemajuan bangsa. Mari berinovasi bersama kami.",
   },

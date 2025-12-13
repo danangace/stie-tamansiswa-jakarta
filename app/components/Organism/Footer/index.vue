@@ -9,12 +9,7 @@ const currentYear = new Date().getFullYear();
         <!-- Brand Column -->
         <div>
           <div class="flex items-center space-x-3 mb-6">
-            <!-- Replace with actual logo component or img -->
-            <div
-              class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center font-bold text-xl"
-            >
-              S
-            </div>
+            <AtomicLogo />
             <span class="text-xl font-bold">STIE Tamansiswa</span>
           </div>
           <p class="text-gray-400 mb-6 leading-relaxed">
