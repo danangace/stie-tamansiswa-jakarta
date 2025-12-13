@@ -81,8 +81,8 @@ const navigationMenuUIClass = {
       <UNavigationMenu
         :ui="navigationMenuUIClass"
         :items="items"
-        content-orientation="vertical"
         color="secondary"
+        :content-orientation="`vertical`"
       />
     </template>
   </UHeader>

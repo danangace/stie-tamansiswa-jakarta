@@ -44,8 +44,10 @@ const news = [
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center mb-12">
         <h2 class="text-3xl font-bold text-gray-900">Berita Terkini</h2>
-        <a href="#" class="text-primary-600 font-medium hover:text-primary-700"
-          >Lihat Semua Berita &rarr;</a
+        <NuxtLink
+          to="/berita"
+          class="text-primary-600 font-medium hover:text-primary-700"
+          >Lihat Semua Berita &rarr;</NuxtLink
         >
       </div>
 
