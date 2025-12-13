@@ -1,0 +1,79 @@
+/* ========================================
+   Scrollbar Configuration Variables
+   ======================================== */
+:root {
+  --scrollbar-width: 8px;
+  --scrollbar-border-radius: var(--radius-50-percent);
+  --scrollbar-track-bg: var(--color-neutral-400);
+  --scrollbar-thumb-bg: var(--color-neutral-600);
+  --scrollbar-thumb-hover-bg: var(--color-neutral-600);
+  --scrollbar-thumb-active-bg: var(--color-neutral-600);
+  --scrollbar-track-margin: 8px;
+  --scrollbar-thumb-border: 2px;
+}
+
+/* ========================================
+   Modern Scrollbar (Firefox + Webkit)
+   ======================================== */
+* {
+  /* Modern scrollbar properties for Firefox and compatible browsers */
+  scrollbar-color: var(--scrollbar-thumb-bg) var(--scrollbar-track-bg);
+  scrollbar-width: thin;
+
+  /* Smooth scrolling behavior */
+  scroll-behavior: smooth;
+}
+
+/* ========================================
+   Webkit Scrollbar Styles
+   ======================================== */
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-bg);
+  margin: var(--scrollbar-track-margin) 0;
+  border-radius: var(--scrollbar-border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-bg);
+  border-radius: var(--scrollbar-border-radius);
+  border: var(--scrollbar-thumb-border) solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-bg);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active-bg);
+}
+
+/* ========================================
+   Mobile Responsive Behavior
+   ======================================== */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  /* Enhanced mobile scrolling */
+  * {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+/* ========================================
+   Scrollbar Corner (when both scrollbars appear)
+   ======================================== */
+::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track-bg);
+}
