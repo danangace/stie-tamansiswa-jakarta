@@ -118,7 +118,7 @@
                   <UButton 
                     icon="i-heroicons-magnifying-glass-plus"
                     size="lg"
-                    color="white"
+                    color="primary"
                     @click="openStructureModal"
                   >
                     Perbesar
@@ -163,17 +163,17 @@
             <div class="flex gap-2">
               <UButton 
                 icon="i-heroicons-chevron-left"
-                color="gray"
+                color="secondary"
                 variant="outline"
-                @click="previousSlide"
                 :disabled="currentSlide === 0"
+                @click="previousSlide"
               />
               <UButton 
                 icon="i-heroicons-chevron-right"
-                color="gray"
+                color="secondary"
                 variant="outline"
-                @click="nextSlide"
                 :disabled="currentSlide >= Math.ceil(activities.length / itemsPerView) - 1"
+                @click="nextSlide"
               />
             </div>
           </div>
@@ -263,9 +263,9 @@
             <button
               v-for="(_, index) in Math.ceil(activities.length / itemsPerView)"
               :key="index"
-              @click="currentSlide = index"
               class="w-3 h-3 rounded-full transition-all duration-300"
               :class="currentSlide === index ? 'bg-blue-600 w-8' : 'bg-gray-300 dark:bg-gray-600'"
+              @click="currentSlide = index"
             />
           </div>
         </div>
@@ -443,12 +443,12 @@ const previousSlide = () => {
 // Helper function for category colors
 const getCategoryColor = (category: string) => {
   const colors: Record<string, string> = {
-    'Workshop': 'blue',
-    'Sosial': 'green',
-    'Olahraga': 'red',
-    'Seminar': 'purple',
-    'Seni': 'pink',
-    'Karir': 'orange'
+    'Workshop': 'primary',
+    'Sosial': 'secondary',
+    'Olahraga': 'error',
+    'Seminar': 'warning',
+    'Seni': 'success',
+    'Karir': 'info'
   };
   return colors[category] || 'gray';
 };
