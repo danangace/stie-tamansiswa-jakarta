@@ -78,11 +78,22 @@ const navigationMenuUIClass = {
       <AtomicLogo />
     </template>
     <template #right>
+      <div class="hidden md:block">
+        <UNavigationMenu
+          :ui="navigationMenuUIClass"
+          :items="items"
+          color="secondary"
+          :content-orientation="`vertical`"
+        />
+      </div>
+    </template>
+
+    <template #body>
       <UNavigationMenu
         :ui="navigationMenuUIClass"
         :items="items"
         color="secondary"
-        :content-orientation="`vertical`"
+        orientation="vertical"
       />
     </template>
   </UHeader>
