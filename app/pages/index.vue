@@ -6,7 +6,6 @@ import InfographicSection from "~/components/Organism/InfographicSection/index.v
 import FacilitySection from "~/components/Organism/FacilitySection/index.vue";
 import NewsSection from "~/components/Organism/NewsSection/index.vue";
 import VideoSection from "~/components/Organism/VideoSection/index.vue";
-import Footer from "~/components/Organism/Footer/index.vue";
 
 const route = useRoute();
 console.log("Current route path:", route.path);
@@ -21,7 +20,6 @@ console.log("Current route path:", route.path);
     <FacilitySection />
     <NewsSection />
     <VideoSection />
-    <Footer />
   </div>
 </template>
 

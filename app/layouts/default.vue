@@ -4,6 +4,7 @@
   <div class="w-full">
     <OrganismNavbar />
     <slot />
+    <OrganismFooter />
   </div>
 </template>
 
