@@ -198,13 +198,6 @@
                       :alt="activity.title"
                       class="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                     />
-                    
-                    <!-- Category Badge -->
-                    <div class="absolute top-4 left-4">
-                      <UBadge :color="getCategoryColor(activity.category)" variant="solid" size="lg">
-                        {{ activity.category }}
-                      </UBadge>
-                    </div>
                   </div>
 
                   <!-- Content -->
@@ -275,6 +268,10 @@
 </template>
 
 <script setup lang="ts">
+
+// Import type dari Nuxt UI
+import type BadgeColor from "@nuxt/ui"
+
 // Type definitions
 interface OrganizationInfo {
   name: string;
@@ -438,19 +435,6 @@ const previousSlide = () => {
   if (currentSlide.value > 0) {
     currentSlide.value--;
   }
-};
-
-// Helper function for category colors
-const getCategoryColor = (category: string) => {
-  const colors: Record<string, string> = {
-    'Workshop': 'primary',
-    'Sosial': 'secondary',
-    'Olahraga': 'error',
-    'Seminar': 'warning',
-    'Seni': 'success',
-    'Karir': 'info'
-  };
-  return colors[category] || 'primary';
 };
 
 // Modal for structure image
