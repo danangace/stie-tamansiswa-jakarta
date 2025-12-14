@@ -450,7 +450,7 @@ const getCategoryColor = (category: string) => {
     'Seni': 'success',
     'Karir': 'info'
   };
-  return colors[category] || 'gray';
+  return colors[category] || 'primary';
 };
 
 // Modal for structure image
