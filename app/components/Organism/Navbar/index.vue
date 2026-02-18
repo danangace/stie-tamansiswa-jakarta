@@ -75,7 +75,12 @@ const navigationMenuUIClass = {
 <template>
   <UHeader :ui="{ root: 'backdrop-filter-none !bg-secondary-500' }">
     <template #title>
-      <AtomicLogo />
+      <div class="flex items-center gap-3">
+        <AtomicLogo />
+        <span class="text-neutral-100 font-bold text-lg">
+          STIE Taman Siswa Jakarta
+        </span>
+      </div>
     </template>
     <template #right>
       <div class="hidden md:block">
