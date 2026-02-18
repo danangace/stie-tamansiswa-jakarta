@@ -5,11 +5,10 @@ definePageMeta({
 });
 
 const missions = [
-  "Menyelenggarakan pendidikan tinggi ekonomi yang berkualitas dan relevan dengan kebutuhan dunia kerja serta perkembangan zaman.",
-  "Melaksanakan penelitian yang inovatif dan bermanfaat bagi pengembangan ilmu pengetahuan, teknologi, dan masyarakat.",
-  "Melaksanakan pengabdian kepada masyarakat sebagai wujud tanggung jawab sosial institusi dalam meningkatkan kesejahteraan masyarakat.",
-  "Mengembangkan tata kelola perguruan tinggi yang baik (Good University Governance) yang transparan, akuntabel, dan kredibel.",
-  "Menanamkan nilai-nilai luhur Tamansiswa dan karakter kebangsaan kepada seluruh civitas akademika.",
+  "Menyelenggarakan kegiatan belajar-mengajar secara kreatif dan inovatif dalam rangka menyinergikan perkembangan ilmu Akuntansi dan Manajemen dengan perkembangan teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan.",
+  "Menyelenggarakan kegiatan penelitian secara kreatif dan inovatif untuk menyinergikan perkembangan ilmu Akuntansi dan manajemen dengan perkembangan teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan.",
+  "Menyelenggarakan kegiatan pengabdian masyarakat yang berbasis pada sinerginya perkembangan ilmu Akuntansi dan Manajemen dengan perkembangan teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan.",
+  "Melakukan kerjasama baik dalam dan luar negeri guna mendukung kegiatan tridharma perguruan tinggi."
 ];
 </script>
 
@@ -54,8 +53,7 @@ const missions = [
             <p
               class="text-xl md:text-2xl text-gray-800 font-medium leading-relaxed relative z-10"
             >
-              Menjadi Perguruan Tinggi Ekonomi yang Unggul, Berkarakter
-              Kebangsaan, dan Berwawasan Global pada Tahun 2030.
+              Pada tahun 2025, STIE Taman Siswa menjadi Perguruan Tinggi yang mampu menyinergikan Perkembangan Ilmu Akuntansi dan Manajemen dengan perkembangan Teknologi Informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan.
             </p>
           </div>
         </div>
