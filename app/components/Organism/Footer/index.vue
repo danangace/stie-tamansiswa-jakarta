@@ -203,37 +203,29 @@ const currentYear = new Date().getFullYear();
           <h3 class="text-lg font-bold mb-6">Hubungi Kami</h3>
           <ul class="space-y-4">
             <li class="flex items-start space-x-3 text-gray-400">
-              <span
-                class="i-heroicons-map-pin w-6 h-6 flex-shrink-0 mt-1"
-              ></span>
+              <UIcon name="i-heroicons-map-pin" class="w-6 h-6 shrink-0 mt-1"/>             
               <span>Jl. Garuda No. 25, Kemayoran, Jakarta Pusat</span>
             </li>
             <li class="flex items-center space-x-3 text-gray-400">
-              <span class="i-heroicons-phone w-5 h-5 flex-shrink-0"></span>
+              <UIcon name="i-heroicons-phone" class="w-6 h-6 shrink-0"/>
               <span>081318222894</span>
             </li>
             <li class="flex items-center space-x-3 text-gray-400">
-              <span class="i-heroicons-envelope w-5 h-5 flex-shrink-0"></span>
-              <span>stiejakartatamsis@gmail.com</span>
+              <UIcon name="i-heroicons-envelope" class="w-6 h-6 shrink-0"/>
+               <span>stiejakartatamsis@gmail.com</span>
             </li>
           </ul>
         </div>
       </div>
 
-      <div
-        class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center"
-      >
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-center items-center">
         <p class="text-gray-500 text-sm mb-4 md:mb-0">
           &copy; {{ currentYear }} STIE Tamansiswa Jakarta. All rights reserved.
         </p>
-        <div class="flex space-x-6 text-sm text-gray-500">
-          <a href="#" class="hover:text-white transition-colors"
-            >Privacy Policy</a
-          >
-          <a href="#" class="hover:text-white transition-colors"
-            >Terms of Service</a
-          >
-        </div>
+        <!-- <div class="flex space-x-6 text-sm text-gray-500">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+        </div> -->
       </div>
     </div>
   </footer>
