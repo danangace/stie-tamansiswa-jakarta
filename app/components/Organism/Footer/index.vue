@@ -10,7 +10,7 @@ const currentYear = new Date().getFullYear();
         <div>
           <div class="flex items-center space-x-3 mb-6">
             <AtomicLogo />
-            <span class="text-xl font-bold">STIE Tamansiswa</span>
+            <span class="text-xl font-bold">STIE Taman Siswa</span>
           </div>
           <p class="text-gray-400 mb-6 leading-relaxed">
             Mencetak lulusan yang unggul, berkarakter, dan siap bersaing di era
@@ -18,9 +18,8 @@ const currentYear = new Date().getFullYear();
           </p>
           <div class="flex space-x-3">
             <!-- Instagram -->
-            <!-- Instagram -->
             <a
-              href="https://instagram.com/stietamansiswa"
+              href="https://instagram.com/stie_tamsisjakarta"
               target="_blank"
               rel="noopener noreferrer"
               class="text-gray-400 hover:text-pink-500 transition-colors duration-300"
@@ -121,6 +120,13 @@ const currentYear = new Date().getFullYear();
           <ul class="space-y-4">
             <li>
               <a
+                href="https://jeb.stieykpn.ac.id/index.php/jeb"
+                class="text-gray-400 hover:text-white transition-colors"
+                >Jurnal Bisnis dan Ekonomi</a
+              >
+            </li>
+            <li>
+              <a
                 href="#"
                 class="text-gray-400 hover:text-white transition-colors"
                 >Tentang Kami</a
@@ -189,13 +195,6 @@ const currentYear = new Date().getFullYear();
                 >Portal Mahasiswa</a
               >
             </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white transition-colors"
-                >E-Library</a
-              >
-            </li>
           </ul>
         </div>
 
@@ -207,17 +206,15 @@ const currentYear = new Date().getFullYear();
               <span
                 class="i-heroicons-map-pin w-6 h-6 flex-shrink-0 mt-1"
               ></span>
-              <span
-                >Jl. Tamansiswa No. 1, Jakarta Selatan, DKI Jakarta 12345</span
-              >
+              <span>Jl. Garuda No. 25, Kemayoran, Jakarta Pusat</span>
             </li>
             <li class="flex items-center space-x-3 text-gray-400">
               <span class="i-heroicons-phone w-5 h-5 flex-shrink-0"></span>
-              <span>(021) 1234-5678</span>
+              <span>081318222894</span>
             </li>
             <li class="flex items-center space-x-3 text-gray-400">
               <span class="i-heroicons-envelope w-5 h-5 flex-shrink-0"></span>
-              <span>info@stie-tamansiswa.ac.id</span>
+              <span>stiejakartatamsis@gmail.com</span>
             </li>
           </ul>
         </div>
