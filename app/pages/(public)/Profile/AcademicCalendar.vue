@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "Struktur Organisasi",
-  path: "/profil/struktur-organisasi",
+  title: "Kalender Akademik",
+  path: "/profil/kalender-akademik",
 });
 
 const organizationImage = "/img/struktur-organisasi.jpeg"; 
@@ -21,7 +21,7 @@ const organizationImage = "/img/struktur-organisasi.jpeg";
         </span>
 
         <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-          Struktur Organisasi
+          Kalender Akademik
         </h1>
 
         <p class="text-gray-500 max-w-2xl mx-auto">
