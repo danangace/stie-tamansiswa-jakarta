@@ -1,68 +1,114 @@
 <script setup lang="ts">
 const staff = [
   {
-    name: "Dr. Nama Rektor, M.M.",
-    position: "Rektor",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop",
+    name: "Denis Kristianto, S.E., M.M.",
+    position: "Ketua STIE Taman Siswa Jakarta",
+    image: "/img/staff/ketua-stie.png",
     greeting:
-      "Selamat datang di STIE Tamansiswa Jakarta. Kami berkomitmen mencetak lulusan berkualitas.",
+      "Kita tidak mencetak pengikut; kita menempa pemimpin yang berani berdiri demi kebenaran",
   },
   {
-    name: "Dr. Nama Wakil Rektor, M.Si.",
-    position: "Wakil Rektor I",
-    image:
-      "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=800&auto=format&fit=crop",
-    greeting:
-      "Pendidikan adalah kunci kemajuan bangsa. Mari berinovasi bersama kami.",
+    name: "Joko Suyono, S.Pd., M.Pd.",
+    position: "Wakil Ketua I Bid. Akademik",
+    image: "/img/staff/wk-i-stie.png",
+    greeting: "",
   },
   {
-    name: "Nama Dekan, S.E., M.Ak.",
-    position: "Dekan Fakultas Ekonomi",
-    image:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop",
+    name: "Tamim Ma’ruf, S.Ag., M.M.",
+    position: "Wakil Ketua II Bid. Administrasi dan Umum",
+    image: "/img/staff/wk-ii-stie.png",
     greeting:
-      "Fakultas Ekonomi siap mengantarkan anda menjadi profesional yang handal.",
+      "Belajar memahami kehidupan untuk mensyukuri keadaan",
+  },
+  {
+    name: "Ir. Tukirin, M.M.",
+    position: "Ketua Program Studi Manajemen",
+    image: "/img/staff/kaprog-manajemen.png",
+    greeting:
+      "Perbaikan Terus-Menerus untuk Kemajuan Bersama",
+  },
+  {
+    name: "Ika Baskara, S.E., M.M.",
+    position: "Ketua Program Studi Akuntansi",
+    image: "/img/staff/kaprog-akuntansi.png",
+    greeting: "",
   },
 ];
 </script>
 
 <template>
-  <div class="py-20 bg-gray-50">
+  <div class="py-24 bg-gradient-to-b from-gray-50 to-white">
     <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+      
+      <!-- Header -->
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
           Tenaga Ahli & Pimpinan
         </h2>
-        <p class="text-gray-600 max-w-2xl mx-auto">
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">
           Berkenalan dengan para pimpinan yang mendedikasikan diri untuk
           kemajuan pendidikan di STIE Tamansiswa Jakarta.
         </p>
       </div>
 
+      <!-- Carousel -->
       <UCarousel
         v-slot="{ item }"
         :items="staff"
-        :ui="{ item: 'basis-full md:basis-1/2 lg:basis-1/3 p-4' }"
+        :ui="{
+          item: 'basis-full md:basis-1/2 lg:basis-1/3 p-4 flex'
+        }"
         indicators
-        class="pb-10"
+        arrows
+        loop
+        :autoplay="{ delay: 3500 }"
+        class="items-stretch"
       >
+        <!-- Card -->
         <div
-          class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden h-full flex flex-col"
+          class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col group"
         >
-          <div class="h-64 overflow-hidden">
+          <!-- Image -->
+          <div class="relative h-72 overflow-hidden">
             <img
               :src="item.image"
               :alt="item.name"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
           </div>
-          <div class="p-6 flex-1 flex flex-col">
-            <h3 class="text-xl font-bold text-gray-900">{{ item.name }}</h3>
-            <p class="text-primary-600 font-medium mb-4">{{ item.position }}</p>
-            <p class="text-gray-600 text-sm italic flex-1">
-              "{{ item.greeting }}"
+
+          <!-- Content -->
+          <div class="p-6 flex flex-col flex-1">
+
+            <!-- Name -->
+            <h3 class="text-lg md:text-xl font-semibold text-gray-900">
+              {{ item.name }}
+            </h3>
+
+            <!-- Position -->
+            <p
+              class="text-primary-600 font-medium mt-1 
+                     line-clamp-2 min-h-[3rem]"
+            >
+              {{ item.position }}
             </p>
+
+            <!-- Divider -->
+            <div class="h-px bg-gray-200 my-4"></div>
+
+            <!-- Greeting -->
+            <div
+              class="flex items-center justify-center 
+                    min-h-[4.5rem] mt-auto text-center"
+            >
+              <p
+                v-if="item.greeting"
+                class="text-gray-600 text-sm italic line-clamp-3"
+              >
+                "{{ item.greeting }}"
+              </p>
+            </div>
           </div>
         </div>
       </UCarousel>
