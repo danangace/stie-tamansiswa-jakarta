@@ -6,28 +6,28 @@ definePageMeta({
 
 const allStaff = [
   {
-    name: "Ki H. Soedjono",
-    position: "Ketua Yayasan",
+    name: "Ika Baskara, S.E., M.M.",
+    position: "Ketua Program Studi Akuntansi",
     image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face",
+      "/img/faculty-members/ketua-akuntansi.png",
   },
   {
-    name: "Dr. H. Marzuki, M.M.",
-    position: "Ketua STIE",
+    name: "Ir. Tukirin, M.M.",
+    position: "Ketua Program Studi Manajemen",
     image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=500&fit=crop&crop=face",
+      "/img/faculty-members/ketua-manajemen.png",
   },
   {
-    name: "Prof. Dr. H. Soemitro",
-    position: "Ketua Senat Akademik",
+    name: "Laela Rahmawati, S. Ak., M.Ak.",
+    position: "Kepala LPPM",
     image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop&crop=face",
+      "/img/faculty-members/kepala-lppm.png",
   },
   {
     name: "Dr. Siti Aminah, M.Si.",
     position: "Wakil Ketua I Bidang Akademik",
     image:
-      "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=400&h=500&fit=crop&crop=face",
+      "/img/faculty-members/kepala-lppm.png",
   },
   {
     name: "H. Budi Santoso, S.E., M.Ak.",
@@ -111,9 +111,9 @@ const allStaff = [
             class="aspect-[3/4] rounded-2xl overflow-hidden mb-4 bg-gray-100"
           >
             <img
-              :src="person.image"
-              :alt="person.name"
-              class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+            :src="person.image"
+            :alt="person.name"
+            class="w-full h-full object-cover transition-all duration-500"
             />
           </div>
           <!-- Info -->

@@ -6,6 +6,7 @@ import InfographicSection from "~/components/Organism/InfographicSection/index.v
 import FacilitySection from "~/components/Organism/FacilitySection/index.vue";
 import NewsSection from "~/components/Organism/NewsSection/index.vue";
 import VideoSection from "~/components/Organism/VideoSection/index.vue";
+import WhatsappFAB from "~/components/Organism/WhatsappFAB/index.vue";
 
 const route = useRoute();
 console.log("Current route path:", route.path);
@@ -20,6 +21,7 @@ console.log("Current route path:", route.path);
     <FacilitySection />
     <NewsSection />
     <VideoSection />
+    <WhatsappFAB />
   </div>
 </template>
 

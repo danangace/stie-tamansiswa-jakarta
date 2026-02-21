@@ -4,7 +4,7 @@ definePageMeta({
   path: "/profil/struktur-organisasi",
 });
 
-const organizationImage = "/img/struktur-organisasi.jpeg"; 
+const organizationImage = "/img/struktur-organisasi.jpg"; 
 
 </script>
 
@@ -32,9 +32,12 @@ const organizationImage = "/img/struktur-organisasi.jpeg";
 
       <!-- Full Image -->
       <div class="w-full">
-        <img
+        <NuxtImg
           :src="organizationImage"
           alt="Struktur Organisasi STIE Tamansiswa Jakarta"
+          format="webp"
+          quality="75"
+          sizes="sm:100vw md:100vw lg:1200px"
           class="w-full h-auto object-contain rounded-2xl shadow-lg"
         />
       </div>

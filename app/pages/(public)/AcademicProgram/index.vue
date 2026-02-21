@@ -252,12 +252,12 @@ const prodiList: ProdiData[] = [
       { label: "Mitra Industri", value: "85+" }
     ],
     kaprodi: {
-      name: "Dr. Andi Pratama, S.E., M.Ak., CPA",
-      position: "Kepala Program Studi Akuntansi",
+      name: "Ika Baskara, S.E., M.M.",
+      position: "Ketua Program Studi Akuntansi",
       photo:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=1000&fit=crop",
+        "/img/ketua-akuntansi.jpeg",
       quote:
-        "Akuntansi bukan sekadar angka, tetapi fondasi kepercayaan dalam setiap keputusan bisnis.",
+        "Akuntansi yang Profesional, Beretika, dan Berdampak untuk Kemajuan Bangsa dan Masyarakat",
       email: "andi.pratama@university.ac.id",
       phone: "+62 811-2233-4455",
       credentials: [
@@ -288,14 +288,14 @@ const prodiList: ProdiData[] = [
       { label: "Startup Binaan", value: "60+" }
     ],
     kaprodi: {
-      name: "Dr. Rina Kurniawati, S.E., M.M.",
-      position: "Kepala Program Studi Manajemen",
+      name: "Ir. Tukirin, M.M. ",
+      position: "Ketua Program Studi Manajemen",
       photo:
-        "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&h=1000&fit=crop",
+        "/img/ketua-manajemen.jpeg",
       quote:
-        "Manajemen yang baik melahirkan organisasi yang berkelanjutan dan berdampak.",
-      email: "rina.kurniawati@university.ac.id",
-      phone: "+62 812-6677-8899",
+        "Perbaikan Terus-Menerus untuk Kemajuan Bersama",
+      email: "afasf rina.kurniawati@university.ac.id",
+      phone: "asdfaf +62 812-6677-8899",
       credentials: [
         "Doctor of Management",
         "Certified Professional Manager",

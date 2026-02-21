@@ -14,46 +14,14 @@ const items = computed<NavigationMenuItem[]>(() => {
       active: route.path.startsWith("/profil"),
       class: "text-base",
       children: [
-        {
-          label: "Visi dan Misi",
-          icon: "i-lucide-target",
-          to: "/profil/visi-misi",
-        },
-        {
-          label: "Sejarah STIE Taman Siswa",
-          icon: "i-lucide-book-open",
-          to: "/profil/tentang",
-        },
-        {
-          label: "Struktur Organisasi",
-          icon: "i-lucide-network",
-          to: "/profil/struktur-organisasi",
-        },
-        {
-          label: "Staff Pengajar",
-          icon: "i-lucide-users",
-          to: "/profil/staff-pengajar",
-        },
-        {
-          label: "Kalender Akademik",
-          icon: "i-lucide-calendar",
-          to: "/profil/kalender-akademik",
-        },
-        {
-          label: "Kerjasama",
-          icon: "i-lucide-handshake",
-          to: "/profil/kerjasama",
-        },
-        {
-          label: "Akreditasi",
-          icon: "i-lucide-award",
-          to: "/profil/akreditasi",
-        },
-        {
-          label: "Organisasi",
-          icon: "i-lucide-building-2",
-          to: "/profil/organisasi",
-        },
+        { label: "Visi dan Misi", icon: "i-lucide-target", to: "/profil/visi-misi" },
+        { label: "Sejarah STIE Taman Siswa", icon: "i-lucide-book-open", to: "/profil/tentang" },
+        { label: "Struktur Organisasi", icon: "i-lucide-network", to: "/profil/struktur-organisasi" },
+        { label: "Staff Pengajar", icon: "i-lucide-users", to: "/profil/staff-pengajar" },
+        { label: "Kalender Akademik", icon: "i-lucide-calendar", to: "/profil/kalender-akademik" },
+        { label: "Kerjasama", icon: "i-lucide-handshake", to: "/profil/kerjasama" },
+        { label: "Akreditasi", icon: "i-lucide-award", to: "/profil/akreditasi" },
+        { label: "Organisasi", icon: "i-lucide-building-2", to: "/profil/organisasi" },
       ],
     },
     {
@@ -61,16 +29,8 @@ const items = computed<NavigationMenuItem[]>(() => {
       active: route.path.startsWith("/program-studi"),
       class: "text-base",
       children: [
-        {
-          label: "S1 Manajemen",
-          icon: "i-lucide-briefcase",
-          to: "/program-studi/manajemen",
-        },
-        {
-          label: "S1 Akuntansi",
-          icon: "i-lucide-calculator",
-          to: "/program-studi/akuntansi",
-        },
+        { label: "S1 Manajemen", icon: "i-lucide-briefcase", to: "/program-studi/manajemen" },
+        { label: "S1 Akuntansi", icon: "i-lucide-calculator", to: "/program-studi/akuntansi" },
       ],
     },
     {
@@ -85,12 +45,20 @@ const items = computed<NavigationMenuItem[]>(() => {
       active: route.path.startsWith("/kemahasiswaan"),
       class: "text-base",
     },
+
+    // 🔥 MENU BARU PMB
+    {
+      label: "PMB",
+      to: "https://forms.gle/ZJbng9btnGg6HA2B6",
+      rel: "noopener",
+      class: "text-base font-bold text-white bg-primary-600 px-4 py-2 rounded-lg hover:bg-primary-700 transition"
+    }
   ];
 });
 
 const navigationMenuUIClass = {
   list: "gap-x-6",
-  linkLabel: "text-neutral-100 font-semibold",
+  linkLabel: "font-semibold text-neutral-800 md:text-neutral-100",
   childList: "p-5",
   childLinkIcon: "mr-3 mt-1",
 };

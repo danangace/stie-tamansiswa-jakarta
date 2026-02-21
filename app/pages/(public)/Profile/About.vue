@@ -42,10 +42,15 @@ Perjalanan panjang kami diwarnai dengan berbagai pencapaian dan inovasi dalam ku
         <div
           class="mb-12 rounded-2xl overflow-hidden shadow-xl aspect-video relative group"
         >
-          <img
-            src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2086&auto=format&fit=crop"
+          <NuxtImg
+            src="/img/sejarah.png"
             alt="Gedung Kampus STIE Tamansiswa"
             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+            width="1200"
+            height="800"
+            sizes="(max-width: 768px) 100vw, 1200px"
+            format="webp"
+            loading="lazy"
           />
           <div
             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"
