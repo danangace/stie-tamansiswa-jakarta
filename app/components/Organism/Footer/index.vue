@@ -120,6 +120,13 @@ const currentYear = new Date().getFullYear();
           <ul class="space-y-4">
             <li>
               <a
+                href="https://forms.gle/ZJbng9btnGg6HA2B6"
+                class="text-gray-400 hover:text-white transition-colors"
+                >Pendaftaran (PMB)</a
+              >
+            </li>
+            <li>
+              <a
                 href="https://jeb.stieykpn.ac.id/index.php/jeb"
                 class="text-gray-400 hover:text-white transition-colors"
                 >Jurnal Bisnis dan Ekonomi</a
@@ -137,13 +144,6 @@ const currentYear = new Date().getFullYear();
                 href="#"
                 class="text-gray-400 hover:text-white transition-colors"
                 >Program Studi</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white transition-colors"
-                >Pendaftaran (PMB)</a
               >
             </li>
             <li>
@@ -201,19 +201,50 @@ const currentYear = new Date().getFullYear();
         <!-- Contact -->
         <div>
           <h3 class="text-lg font-bold mb-6">Hubungi Kami</h3>
+
           <ul class="space-y-4">
+
+            <!-- Alamat -->
             <li class="flex items-start space-x-3 text-gray-400">
-              <UIcon name="i-heroicons-map-pin" class="w-6 h-6 shrink-0 mt-1"/>             
-              <span>Jl. Garuda No. 25, Kemayoran, Jakarta Pusat</span>
+              <UIcon name="i-heroicons-map-pin" class="w-6 h-6 shrink-0 mt-1"/>
+              <span>
+                Jl. Garuda No. 25, Kemayoran, Jakarta Pusat
+              </span>
             </li>
+
+            <!-- Telepon Kantor -->
             <li class="flex items-center space-x-3 text-gray-400">
               <UIcon name="i-heroicons-phone" class="w-6 h-6 shrink-0"/>
-              <span>081318222894</span>
+              <a 
+                href="tel:0214265630"
+                class="hover:text-white transition-colors"
+              >
+                (021) 4265630
+              </a>
             </li>
+
+            <!-- HP -->
+            <li class="flex items-center space-x-3 text-gray-400">
+              <UIcon name="i-heroicons-device-phone-mobile" class="w-6 h-6 shrink-0"/>
+              <a 
+                href="https://wa.me/6281318222894"
+                class="hover:text-white transition-colors"
+              >
+                081318222894
+              </a>
+            </li>
+
+            <!-- Email -->
             <li class="flex items-center space-x-3 text-gray-400">
               <UIcon name="i-heroicons-envelope" class="w-6 h-6 shrink-0"/>
-               <span>stiejakartatamsis@gmail.com</span>
+              <a 
+                href="mailto:stiejakartatamsis@gmail.com"
+                class="hover:text-white transition-colors"
+              >
+                stiejakartatamsis@gmail.com
+              </a>
             </li>
+
           </ul>
         </div>
       </div>
