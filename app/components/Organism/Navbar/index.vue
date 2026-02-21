@@ -90,7 +90,7 @@ const items = computed<NavigationMenuItem[]>(() => {
 
 const navigationMenuUIClass = {
   list: "gap-x-6",
-  linkLabel: "text-neutral-100 font-semibold",
+  linkLabel: "font-semibold text-neutral-800 md:text-neutral-100",
   childList: "p-5",
   childLinkIcon: "mr-3 mt-1",
 };
