@@ -11,7 +11,7 @@ const staff = [
     name: "Joko Suyono, S.Pd., M.Pd.",
     position: "Wakil Ketua I Bid. Akademik",
     image: "/img/staff/wk-i-stie.png",
-    greeting: "",
+    greeting: "Mari Lakukan yang terbaik selagi ada kesempatan, mulai dari diri sendiri dan mulai dari sekarang",
   },
   {
     name: "Tamim Ma’ruf, S.Ag., M.M.",
@@ -31,7 +31,7 @@ const staff = [
     name: "Ika Baskara, S.E., M.M.",
     position: "Ketua Program Studi Akuntansi",
     image: "/img/staff/kaprog-akuntansi.png",
-    greeting: "",
+    greeting: "Akuntansi yang Profesional, Beretika, dan Berdampak untuk Kemajuan Bangsa dan Masyarakat",
   },
 ];
 </script>
