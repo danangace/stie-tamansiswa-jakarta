@@ -83,7 +83,7 @@ Perjalanan panjang kami diwarnai dengan berbagai pencapaian dan inovasi dalam ku
                 class="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-white shadow-lg relative z-10"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop"
+                  src="/img/sejarah/denis-kristianto.jpeg"
                   alt="Foto Ketua STIE"
                   class="w-full h-full object-cover"
                 />
@@ -101,12 +101,12 @@ Perjalanan panjang kami diwarnai dengan berbagai pencapaian dan inovasi dalam ku
             <div class="text-center md:text-left flex-1">
               <div class="mb-4">
                 <h3 class="text-2xl font-bold text-gray-900 mb-1">
-                  Dr. Nama Ketua, M.M.
+                  Denis Kristianto, S.E., M.M.
                 </h3>
                 <p
                   class="text-primary-600 font-medium uppercase tracking-wide text-sm"
                 >
-                  Ketua STIE Tamansiswa Jakarta
+                  Ketua STIE Taman Siswa Jakarta
                 </p>
               </div>
 
