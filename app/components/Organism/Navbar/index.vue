@@ -17,7 +17,7 @@ const items = computed<NavigationMenuItem[]>(() => {
         { label: "Visi dan Misi", icon: "i-lucide-target", to: "/profil/visi-misi" },
         { label: "Sejarah STIE Taman Siswa", icon: "i-lucide-book-open", to: "/profil/tentang" },
         { label: "Struktur Organisasi", icon: "i-lucide-network", to: "/profil/struktur-organisasi" },
-        { label: "Staff Pengajar", icon: "i-lucide-users", to: "/profil/staff-pengajar" },
+        { label: "Tenaga Pengajar", icon: "i-lucide-users", to: "/profil/staff-pengajar" },
         // { label: "Kalender Akademik", icon: "i-lucide-calendar", to: "/profil/kalender-akademik" },
         // { label: "Kerjasama", icon: "i-lucide-handshake", to: "/profil/kerjasama" },
         // { label: "Akreditasi", icon: "i-lucide-award", to: "/profil/akreditasi" },
