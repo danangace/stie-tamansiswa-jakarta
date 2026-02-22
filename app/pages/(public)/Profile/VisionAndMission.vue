@@ -31,10 +31,7 @@ const missions = [
       <div class="max-w-3xl mx-auto space-y-16">
         <!-- Vision Section -->
         <div class="text-center">
-          <h2
-            class="text-2xl font-bold text-gray-900 mb-6 flex items-center justify-center gap-3"
-          >
-            <span class="i-heroicons-eye text-primary-600 w-8 h-8"></span>
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">
             Visi
           </h2>
           <div
@@ -60,12 +57,7 @@ const missions = [
 
         <!-- Mission Section -->
         <div>
-          <h2
-            class="text-2xl font-bold text-gray-900 mb-8 flex items-center justify-center gap-3"
-          >
-            <span
-              class="i-heroicons-rocket-launch text-primary-600 w-8 h-8"
-            ></span>
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">
             Misi
           </h2>
           <div class="space-y-4">

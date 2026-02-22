@@ -5,11 +5,11 @@ definePageMeta({
 });
 
 const history = `
-STIE Tamansiswa Jakarta didirikan dengan semangat untuk mencerdaskan kehidupan bangsa melalui pendidikan ekonomi yang berkualitas. Berlandaskan ajaran Ki Hadjar Dewantara, kami berkomitmen untuk tidak hanya mencetak sarjana yang kompeten secara akademis, tetapi juga memiliki karakter luhur dan jiwa kebangsaan.
+STIE Taman Siswa Jakarta merupakan bagian dari keluarga besar Perguruan Tamansiswa yang berlandaskan ajaran Ki Hadjar Dewantara. Semangat pendidikan yang diusung menempatkan pembentukan karakter, kemandirian, dan jiwa kebangsaan sebagai fondasi utama dalam proses pembelajaran.
 
-Sejak awal berdirinya, STIE Tamansiswa Jakarta terus berkembang mengikuti dinamika zaman dan kebutuhan industri. Kami telah meluluskan ribuan alumni yang kini berkiprah di berbagai sektor, baik pemerintahan, swasta, maupun wirausaha.
+Didirikan untuk menjawab kebutuhan pendidikan tinggi di bidang ekonomi, STIE Taman Siswa Jakarta memfokuskan pengembangan keilmuan pada Akuntansi dan Manajemen yang selaras dengan perkembangan dunia usaha dan teknologi informasi. Integrasi antara kompetensi akademik dan nilai-nilai ketamansiswaan menjadi ciri khas institusi ini.
 
-Perjalanan panjang kami diwarnai dengan berbagai pencapaian dan inovasi dalam kurikulum serta metode pembelajaran. Kami percaya bahwa pendidikan adalah kunci utama untuk membangun masa depan yang lebih baik, dan kami bangga menjadi bagian dari perjalanan sukses para mahasiswa kami.
+Dalam perjalanannya, STIE Taman Siswa Jakarta terus beradaptasi terhadap dinamika zaman melalui penguatan kurikulum, peningkatan kualitas dosen, serta pengembangan kerja sama institusional. Komitmen tersebut diarahkan untuk mencetak lulusan yang profesional, berintegritas, dan memiliki jiwa kewirausahaan, sejalan dengan prinsip pendidikan yang diwariskan oleh Ki Hadjar Dewantara: Ing Ngarsa Sung Tuladha, Ing Madya Mangun Karsa, dan Tut Wuri Handayani.
 `;
 </script>
 
@@ -32,7 +32,7 @@ Perjalanan panjang kami diwarnai dengan berbagai pencapaian dan inovasi dalam ku
           class="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed"
         >
           Lembaga pendidikan tinggi yang mengedepankan integritas, keunggulan
-          akademik, dan nilai-nilai luhur Tamansiswa.
+          akademik, dan nilai-nilai luhur Taman Siswa.
         </p>
       </div>
 
@@ -110,16 +110,10 @@ Perjalanan panjang kami diwarnai dengan berbagai pencapaian dan inovasi dalam ku
                 </p>
               </div>
 
-              <blockquote class="text-gray-600 italic leading-relaxed relative">
-                <span class="text-4xl text-gray-200 absolute -top-4 -left-2"
-                  >"</span
-                >
-                Kami bertekad untuk terus berinovasi dan memberikan layanan
-                pendidikan terbaik bagi putra-putri bangsa. Mari bergabung
-                bersama kami untuk masa depan yang gemilang.
-                <span class="text-4xl text-gray-200 absolute -bottom-8 -right-2"
-                  >"</span
-                >
+              <blockquote class="text-gray-600 italic leading-relaxed relative text-center">
+                <span class="text-4xl text-gray-200 absolute -top-4 -left-2">"</span>
+                Kami bertekad untuk terus berinovasi dan memberikan layanan pendidikan terbaik bagi putra-putri bangsa. Mari bergabung bersama kami untuk masa depan yang gemilang.
+                <span class="text-4xl text-gray-200 absolute -bottom-8 -right-2">"</span>
               </blockquote>
             </div>
           </div>
