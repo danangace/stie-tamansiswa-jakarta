@@ -290,8 +290,8 @@ const prodiList: ProdiData[] = [
         "/img/ketua-manajemen.jpeg",
       quote:
         "Perbaikan Terus-Menerus untuk Kemajuan Bersama",
-      email: "afasf rina.kurniawati@university.ac.id",
-      phone: "asdfaf +62 812-6677-8899",
+      email: "stiejakartatamsis@gmail.com",
+      phone: "+62 818-891-517",
       credentials: []
     }
   }

@@ -47,7 +47,7 @@ const items = computed<NavigationMenuItem[]>(() => {
     // },
     {
       label: "Kemahasiswaan",
-      active: route.path.startsWith("/program-studi"),
+      active: route.path.startsWith("/kemahasiswaan"),
       class: "text-base",
       children: [
         { label: "Form Pelacakan Alumni", to: "https://forms.gle/Qaj1qpYvZpUtTgvQ7", rel: "noopener" },
