@@ -54,7 +54,7 @@ const currentYear = new Date().getFullYear();
                 href="https://forms.gle/ZJbng9btnGg6HA2B6"
                 class="hover:text-white transition-colors"
               >
-                Pendaftaran (PMB)
+                Form Pendaftaran Mahasiswa Baru (PMB)
               </a>
             </li>
             <li>
@@ -100,7 +100,7 @@ const currentYear = new Date().getFullYear();
           </h3>
 
           <ul class="space-y-5 text-gray-400">
-            
+
             <!-- Alamat -->
             <li>
               <div class="flex items-start space-x-3">

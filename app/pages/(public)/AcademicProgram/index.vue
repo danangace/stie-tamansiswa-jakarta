@@ -246,10 +246,10 @@ const prodiList: ProdiData[] = [
       "Membangun kerja sama dengan dunia usaha dan industri"
     ],
     statistics: [
-      { label: "Mahasiswa Aktif", value: "720+" },
-      { label: "Dosen Tetap", value: "38" },
+      { label: "Mahasiswa Aktif", value: "50+" },
+      { label: "Dosen Tetap", value: "10" },
       { label: "Alumni", value: "2K+" },
-      { label: "Mitra Industri", value: "85+" }
+      { label: "Mitra Industri", value: "5+" }
     ],
     kaprodi: {
       name: "Ika Baskara, S.E., M.M.",
@@ -258,13 +258,9 @@ const prodiList: ProdiData[] = [
         "/img/ketua-akuntansi.jpeg",
       quote:
         "Akuntansi yang Profesional, Beretika, dan Berdampak untuk Kemajuan Bangsa dan Masyarakat",
-      email: "andi.pratama@university.ac.id",
-      phone: "+62 811-2233-4455",
-      credentials: [
-        "Doctor of Accounting",
-        "Certified Public Accountant (CPA)",
-        "15+ Years Academic Experience"
-      ]
+      email: "baskaraika@gmail.com",
+      phone: "+62 812-8462-191",
+      credentials: []
     }
   },
   {
@@ -282,10 +278,10 @@ const prodiList: ProdiData[] = [
       "Menjalin kemitraan strategis dengan industri"
     ],
     statistics: [
-      { label: "Mahasiswa Aktif", value: "980+" },
-      { label: "Dosen Tetap", value: "42" },
+      { label: "Mahasiswa Aktif", value: "200+" },
+      { label: "Dosen Tetap", value: "15" },
       { label: "Alumni", value: "3K+" },
-      { label: "Startup Binaan", value: "60+" }
+      { label: "Mitra Industri", value: "10+" }
     ],
     kaprodi: {
       name: "Ir. Tukirin, M.M. ",
@@ -296,11 +292,7 @@ const prodiList: ProdiData[] = [
         "Perbaikan Terus-Menerus untuk Kemajuan Bersama",
       email: "afasf rina.kurniawati@university.ac.id",
       phone: "asdfaf +62 812-6677-8899",
-      credentials: [
-        "Doctor of Management",
-        "Certified Professional Manager",
-        "18+ Years Industry & Academic Experience"
-      ]
+      credentials: []
     }
   }
 ]

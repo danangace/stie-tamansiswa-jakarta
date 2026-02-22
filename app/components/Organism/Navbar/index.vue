@@ -45,10 +45,19 @@ const items = computed<NavigationMenuItem[]>(() => {
     //   active: route.path.startsWith("/kemahasiswaan"),
     //   class: "text-base",
     // },
+    {
+      label: "Kemahasiswaan",
+      active: route.path.startsWith("/program-studi"),
+      class: "text-base",
+      children: [
+        { label: "Form Pelacakan Alumni", to: "https://forms.gle/Qaj1qpYvZpUtTgvQ7", rel: "noopener" },
+        { label: "Form Pengguna Lulusan", to: "https://forms.gle/u2iqkcC8K5zXrmTu9", rel: "noopener" },
+      ],
+    },
 
     // 🔥 MENU BARU PMB
     {
-      label: "PMB",
+      label: "Form PMB",
       to: "https://forms.gle/ZJbng9btnGg6HA2B6",
       rel: "noopener",
       class: "text-base font-bold text-white bg-primary-600 px-4 py-2 rounded-lg hover:bg-primary-700 transition"
