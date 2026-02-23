@@ -11,7 +11,7 @@ const facultyMembers = [
     image: "/img/faculty-members/denis-kristianto.png",
   },
   {
-    name: "Joko Suyono, S.Pd., M.Pd",
+    name: "Joko Suyono, S.Si., M.Pd",
     position: "Wakil Ketua I - Bid. Akademik",
     image: "/img/faculty-members/joko-suyono.png",
   },
