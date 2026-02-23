@@ -40,58 +40,45 @@ const news = [
 </script>
 
 <template>
-  <div class="py-20 bg-gray-50">
+  <div class="py-20 bg-gray-50 dark:bg-neutral-900">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">Berita Terkini</h2>
-        <NuxtLink
-          to="/berita"
-          class="text-primary-600 font-medium hover:text-primary-700"
-          >Lihat Semua Berita &rarr;</NuxtLink
-        >
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-neutral-100">Berita Terkini</h2>
+        <NuxtLink to="/berita"
+          class="text-primary-600 dark:text-primary-300 font-medium hover:text-primary-700 dark:hover:text-primary-200">
+          Lihat Semua Berita &rarr;</NuxtLink>
       </div>
 
-      <UCarousel
-        v-slot="{ item }"
-        :items="news"
-        :ui="{ item: 'basis-full md:basis-1/2 lg:basis-1/3 p-4' }"
-        class="pb-4"
-      >
+      <UCarousel v-slot="{ item }" :items="news" :ui="{ item: 'basis-full md:basis-1/2 lg:basis-1/3 p-4' }"
+        class="pb-4">
         <div
-          class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100"
-        >
+          class="bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-neutral-700">
           <div class="h-48 overflow-hidden relative">
-            <img
-              :src="item.image"
-              :alt="item.title"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-            />
+            <img :src="item.image" :alt="item.title"
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             <div
-              class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-gray-800 shadow-sm"
-            >
+              class="absolute top-4 left-4 bg-white/90 dark:bg-neutral-800/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-gray-800 dark:text-neutral-200 shadow-sm">
               {{ item.date }}
             </div>
           </div>
           <div class="p-6 flex-1 flex flex-col">
-            <div class="flex items-center text-xs text-gray-500 mb-3 space-x-2">
-              <span class="font-medium text-primary-600">{{
+            <div class="flex items-center text-xs text-gray-500 dark:text-neutral-400 mb-3 space-x-2">
+              <span class="font-medium text-primary-600 dark:text-primary-300">{{
                 item.author
-              }}</span>
+                }}</span>
               <span>&bull;</span>
               <span>5 min read</span>
             </div>
             <h3
-              class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-primary-600 transition-colors cursor-pointer"
-            >
+              class="text-xl font-bold text-gray-900 dark:text-neutral-100 mb-3 line-clamp-2 hover:text-primary-600 dark:hover:text-primary-300 transition-colors cursor-pointer">
               {{ item.title }}
             </h3>
-            <p class="text-gray-600 text-sm line-clamp-3 mb-4 flex-1">
+            <p class="text-gray-600 dark:text-neutral-400 text-sm line-clamp-3 mb-4 flex-1">
               {{ item.excerpt }}
             </p>
-            <div class="mt-auto pt-4 border-t border-gray-100">
+            <div class="mt-auto pt-4 border-t border-gray-100 dark:border-neutral-700">
               <button
-                class="text-sm font-medium text-gray-900 hover:text-primary-600 transition-colors flex items-center"
-              >
+                class="text-sm font-medium text-gray-900 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-300 transition-colors flex items-center">
                 Baca Selengkapnya
                 <span class="i-heroicons-arrow-right ml-1 w-4 h-4"></span>
               </button>

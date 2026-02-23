@@ -20,11 +20,7 @@ const partners = [
       </div>
 
       <div class="grid">
-        <div
-          v-for="(partner, index) in partners"
-          :key="index"
-          class="card"
-        >
+        <div v-for="(partner, index) in partners" :key="index" class="card">
           {{ partner }}
         </div>
       </div>
@@ -36,6 +32,11 @@ const partners = [
 .partner-section {
   padding: 80px 20px;
   background: #f8fafc;
+}
+
+:is(.dark *) .partner-section,
+.dark .partner-section {
+  background: #1c1c1e;
 }
 
 .container {
@@ -54,6 +55,11 @@ const partners = [
   color: #1f2937;
 }
 
+:is(.dark *) .header h2,
+.dark .header h2 {
+  color: #e5e5e5;
+}
+
 /* GRID */
 .grid {
   display: grid;
@@ -69,9 +75,12 @@ const partners = [
   padding: 24px;
   min-height: 120px;
 
-  display: flex;                /* penting */
-  align-items: center;          /* vertical center */
-  justify-content: center;      /* horizontal center */
+  display: flex;
+  /* penting */
+  align-items: center;
+  /* vertical center */
+  justify-content: center;
+  /* horizontal center */
   text-align: center;
 
   font-weight: 500;
@@ -79,9 +88,21 @@ const partners = [
   transition: all 0.3s ease;
 }
 
+:is(.dark *) .card,
+.dark .card {
+  background: #262626;
+  border-color: #404040;
+  color: #d4d4d4;
+}
+
 .card:hover {
   border-color: #16a34a;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   transform: translateY(-4px);
+}
+
+:is(.dark *) .card:hover,
+.dark .card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 </style>

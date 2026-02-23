@@ -14,7 +14,7 @@ const staff = [
     greeting: "Mari Lakukan yang terbaik selagi ada kesempatan, mulai dari diri sendiri dan mulai dari sekarang",
   },
   {
-    name: "Tamim Ma’ruf, S.Ag., M.M.",
+    name: "Tamim Ma'ruf, S.Ag., M.M.",
     position: "Wakil Ketua II Bid. Administrasi dan Umum",
     image: "/img/staff/wk-ii-stie.png",
     greeting:
@@ -37,44 +37,31 @@ const staff = [
 </script>
 
 <template>
-  <div class="py-24 bg-gradient-to-b from-gray-50 to-white">
+  <div class="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-neutral-900 dark:to-neutral-800">
     <div class="container mx-auto px-4">
-      
+
       <!-- Header -->
       <div class="text-center mb-14">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-neutral-100 mb-4">
           Tenaga Ahli & Pimpinan
         </h2>
-        <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+        <p class="text-gray-600 dark:text-neutral-400 max-w-2xl mx-auto text-lg">
           Berkenalan dengan para pimpinan yang mendedikasikan diri untuk
           kemajuan pendidikan di STIE Tamansiswa Jakarta.
         </p>
       </div>
 
       <!-- Carousel -->
-      <UCarousel
-        v-slot="{ item }"
-        :items="staff"
-        :ui="{
-          item: 'basis-full md:basis-1/2 lg:basis-1/3 p-4 flex'
-        }"
-        indicators
-        arrows
-        loop
-        :autoplay="{ delay: 3500 }"
-        class="items-stretch"
-      >
+      <UCarousel v-slot="{ item }" :items="staff" :ui="{
+        item: 'basis-full md:basis-1/2 lg:basis-1/3 p-4 flex'
+      }" indicators arrows loop :autoplay="{ delay: 3500 }" class="items-stretch">
         <!-- Card -->
         <div
-          class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col group"
-        >
+          class="bg-white dark:bg-[#2498D3] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col group">
           <!-- Image -->
           <div class="relative h-72 overflow-hidden">
-            <img
-              :src="item.image"
-              :alt="item.name"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
+            <img :src="item.image" :alt="item.name"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
           </div>
 
@@ -82,30 +69,23 @@ const staff = [
           <div class="p-6 flex flex-col flex-1">
 
             <!-- Name -->
-            <h3 class="text-lg md:text-xl font-semibold text-gray-900">
+            <h3 class="text-lg md:text-xl font-semibold text-gray-900 dark:text-neutral-100">
               {{ item.name }}
             </h3>
 
             <!-- Position -->
-            <p
-              class="text-primary-600 font-medium mt-1 
-                     line-clamp-2 min-h-[3rem]"
-            >
+            <p class="text-primary-600 dark:text-neutral-100 font-medium mt-1 
+                     line-clamp-2 min-h-[3rem]">
               {{ item.position }}
             </p>
 
             <!-- Divider -->
-            <div class="h-px bg-gray-200 my-4"></div>
+            <div class="h-px bg-gray-200 dark:bg-neutral-700 my-4"></div>
 
             <!-- Greeting -->
-            <div
-              class="flex items-center justify-center 
-                    min-h-[4.5rem] mt-auto text-center"
-            >
-              <p
-                v-if="item.greeting"
-                class="text-gray-600 text-sm italic line-clamp-3"
-              >
+            <div class="flex items-center justify-center 
+                    min-h-[4.5rem] mt-auto text-center">
+              <p v-if="item.greeting" class="text-gray-600 dark:text-neutral-400 text-sm italic line-clamp-3">
                 "{{ item.greeting }}"
               </p>
             </div>

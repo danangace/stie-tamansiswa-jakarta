@@ -53,3 +53,24 @@
   --color-yellow-800: #cac302;
   --color-yellow-900: #b6b002;
 }
+
+/* ========================================
+   Dark Mode Overrides
+   When .dark class is present on <html>,
+   override key tokens for dark surfaces.
+   ======================================== */
+.dark {
+  --color-text-100: #ffffff;
+  --color-text-200: #c4c4c6;
+  --color-text-300: #a1a1a1;
+
+  --color-neutral-100: #171717;
+  --color-neutral-200: #1c1c1e;
+  --color-neutral-300: #212121;
+  --color-neutral-400: #2a2a2a;
+  --color-neutral-500: #3a3a3a;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #6b6b6b;
+  --color-neutral-800: #a3a3a3;
+  --color-neutral-900: #e5e5e5;
+}

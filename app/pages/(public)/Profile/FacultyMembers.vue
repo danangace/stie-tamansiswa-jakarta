@@ -94,44 +94,34 @@ const facultyMembers = [
 </script>
 
 <template>
-  <div class="bg-white min-h-screen py-12 md:py-20">
+  <div class="bg-white dark:bg-neutral-900 min-h-screen py-12 md:py-20">
     <div class="container mx-auto px-4 max-w-6xl">
       <!-- Header -->
       <div class="text-center mb-16">
-        <span
-          class="text-primary-600 font-semibold tracking-wider uppercase text-sm mb-2 block"
-        >
+        <span class="text-primary-600 dark:text-primary-300 font-semibold tracking-wider uppercase text-sm mb-2 block">
           Sivitas Akademika
         </span>
-        <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+        <h1 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-neutral-100 mb-6">
           Pimpinan dan Tenaga Pengajar
         </h1>
-        <p class="text-gray-500 max-w-2xl mx-auto">
-          Profil pimpinan, dosen, dan tenaga kependidikan STIE Tamansiswa Jakarta yang berkomitmen dalam mendukung kualitas pendidikan dan pengembangan akademik.
+        <p class="text-gray-500 dark:text-neutral-400 max-w-2xl mx-auto">
+          Profil pimpinan, dosen, dan tenaga kependidikan STIE Tamansiswa Jakarta yang berkomitmen dalam mendukung
+          kualitas pendidikan dan pengembangan akademik.
         </p>
       </div>
 
       <!-- Staff Grid -->
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <div
-          v-for="(member, index) in facultyMembers"
-          :key="index"
-          class="group cursor-pointer"
-        >
+        <div v-for="(member, index) in facultyMembers" :key="index" class="group cursor-pointer">
           <!-- Photo -->
-          <div
-            class="aspect-3/4 rounded-2xl overflow-hidden mb-4 bg-gray-100"
-          >
-            <img
-            :src="member.image"
-            :alt="member.name"
-            class="w-full h-full object-cover transition-all duration-500"
-            />
+          <div class="aspect-3/4 rounded-2xl overflow-hidden mb-4 bg-gray-100 dark:bg-neutral-800">
+            <img :src="member.image" :alt="member.name"
+              class="w-full h-full object-cover transition-all duration-500" />
           </div>
           <!-- Info -->
           <div class="text-center">
-            <h3 class="font-bold text-gray-900 mb-1">{{ member.name }}</h3>
-            <p class="text-gray-500 text-sm">{{ member.position }}</p>
+            <h3 class="font-bold text-gray-900 dark:text-neutral-100 mb-1">{{ member.name }}</h3>
+            <p class="text-gray-500 dark:text-neutral-400 text-sm">{{ member.position }}</p>
           </div>
         </div>
       </div>
