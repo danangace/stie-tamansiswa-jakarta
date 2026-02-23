@@ -8,6 +8,7 @@ const partners = [
   "RW 19 Kelurahan Mustika Jaya Kecamatan Mustika Jaya Kota Bekasi",
   "PT. Duta Amanah Insani",
   "PT. Caturaga Tiara Persada",
+  "LPK Kiraku Indonesia"
 ];
 </script>
 

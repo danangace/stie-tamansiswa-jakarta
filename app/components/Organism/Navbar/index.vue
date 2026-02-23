@@ -17,11 +17,11 @@ const items = computed<NavigationMenuItem[]>(() => {
         { label: "Visi dan Misi", icon: "i-lucide-target", to: "/profil/visi-misi" },
         { label: "Sejarah STIE Taman Siswa", icon: "i-lucide-book-open", to: "/profil/tentang" },
         { label: "Struktur Organisasi", icon: "i-lucide-network", to: "/profil/struktur-organisasi" },
-        { label: "Staff Pengajar", icon: "i-lucide-users", to: "/profil/staff-pengajar" },
-        { label: "Kalender Akademik", icon: "i-lucide-calendar", to: "/profil/kalender-akademik" },
-        { label: "Kerjasama", icon: "i-lucide-handshake", to: "/profil/kerjasama" },
-        { label: "Akreditasi", icon: "i-lucide-award", to: "/profil/akreditasi" },
-        { label: "Organisasi", icon: "i-lucide-building-2", to: "/profil/organisasi" },
+        { label: "Tenaga Pengajar", icon: "i-lucide-users", to: "/profil/staff-pengajar" },
+        // { label: "Kalender Akademik", icon: "i-lucide-calendar", to: "/profil/kalender-akademik" },
+        // { label: "Kerjasama", icon: "i-lucide-handshake", to: "/profil/kerjasama" },
+        // { label: "Akreditasi", icon: "i-lucide-award", to: "/profil/akreditasi" },
+        // { label: "Organisasi", icon: "i-lucide-building-2", to: "/profil/organisasi" },
       ],
     },
     {
@@ -33,22 +33,31 @@ const items = computed<NavigationMenuItem[]>(() => {
         { label: "S1 Akuntansi", icon: "i-lucide-calculator", to: "/program-studi/akuntansi" },
       ],
     },
-    {
-      label: "Berita",
-      to: "/berita",
-      active: route.path.startsWith("/berita"),
-      class: "text-base",
-    },
+    // {
+    //   label: "Berita",
+    //   to: "/berita",
+    //   active: route.path.startsWith("/berita"),
+    //   class: "text-base",
+    // },
+    // {
+    //   label: "Kemahasiswaan",
+    //   to: "/kemahasiswaan",
+    //   active: route.path.startsWith("/kemahasiswaan"),
+    //   class: "text-base",
+    // },
     {
       label: "Kemahasiswaan",
-      to: "/kemahasiswaan",
       active: route.path.startsWith("/kemahasiswaan"),
       class: "text-base",
+      children: [
+        { label: "Form Pelacakan Alumni", to: "https://forms.gle/Qaj1qpYvZpUtTgvQ7", rel: "noopener" },
+        { label: "Form Pengguna Lulusan", to: "https://forms.gle/u2iqkcC8K5zXrmTu9", rel: "noopener" },
+      ],
     },
 
     // 🔥 MENU BARU PMB
     {
-      label: "PMB",
+      label: "Form PMB",
       to: "https://forms.gle/ZJbng9btnGg6HA2B6",
       rel: "noopener",
       class: "text-base font-bold text-white bg-primary-600 px-4 py-2 rounded-lg hover:bg-primary-700 transition"
