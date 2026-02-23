@@ -2,49 +2,60 @@
 definePageMeta({
   layout: "default",
   path: "/profil/tentang",
+  title: "Tentang STIE Taman Siswa Jakarta",
 });
 
 const history = `
-STIE Taman Siswa Jakarta merupakan bagian dari keluarga besar Perguruan Tamansiswa yang berlandaskan ajaran Ki Hadjar Dewantara. Semangat pendidikan yang diusung menempatkan pembentukan karakter, kemandirian, dan jiwa kebangsaan sebagai fondasi utama dalam proses pembelajaran.
+Sekolah Tinggi Ilmu Ekonomi Taman Siswa Jakarta didirikan pada tanggal 4 September 1993 di Jakarta dengan izin operasional dari pemerintah oleh Yayasan Perguruan Tamansiswa Cabang Jakarta. Tanggal tersebut sekaligus ditetapkan sebagai Dies Natalis STIE Taman Siswa Jakarta.
 
-Didirikan untuk menjawab kebutuhan pendidikan tinggi di bidang ekonomi, STIE Taman Siswa Jakarta memfokuskan pengembangan keilmuan pada Akuntansi dan Manajemen yang selaras dengan perkembangan dunia usaha dan teknologi informasi. Integrasi antara kompetensi akademik dan nilai-nilai ketamansiswaan menjadi ciri khas institusi ini.
+Sebagai bagian dari sistem pendidikan nasional yang berdasarkan Pancasila dan Undang-Undang Dasar 1945, STIE Taman Siswa Jakarta bertujuan menyiapkan peserta didik menjadi anggota masyarakat yang memiliki kemampuan, kecakapan, dan keterampilan dalam mengembangkan ilmu pengetahuan dan teknologi, serta mengupayakan penggunaannya bagi masyarakat, bangsa, dan negara sesuai dengan Undang-Undang No. 20 Tahun 2003 tentang Sistem Pendidikan Nasional dan Undang-Undang No. 12 Tahun 2012 tentang Pendidikan Tinggi.
 
-Dalam perjalanannya, STIE Taman Siswa Jakarta terus beradaptasi terhadap dinamika zaman melalui penguatan kurikulum, peningkatan kualitas dosen, serta pengembangan kerja sama institusional. Komitmen tersebut diarahkan untuk mencetak lulusan yang profesional, berintegritas, dan memiliki jiwa kewirausahaan, sejalan dengan prinsip pendidikan yang diwariskan oleh Ki Hadjar Dewantara: Ing Ngarsa Sung Tuladha, Ing Madya Mangun Karsa, dan Tut Wuri Handayani.
+STIE Taman Siswa Jakarta bernaung di bawah Yayasan Persatuan Perguruan Tamansiswa Yogyakarta dan merupakan bagian dari masyarakat ilmiah yang bersifat universal dengan mengedepankan ajaran Ki Hadjar Dewantara: Ing Ngarso Sung Tulodo, Ing Madya Mangun Karso, dan Tut Wuri Handayani.
+
+Dalam menyongsong era globalisasi dan transformasi digital, STIE Taman Siswa Jakarta terus berkomitmen mengembangkan sumber daya manusia yang berkualitas, berintegritas, serta mampu berdaya saing nasional. Sejak berdiri pada tahun 1993, STIE Taman Siswa Jakarta telah menghasilkan lulusan yang tersebar di berbagai sektor pemerintahan, swasta, dan wirausaha.
 `;
+
+const accreditations = [
+  "Izin Operasional Kopertis Wilayah III DKI Jakarta (4 September 1993).",
+  "Surat DIKTI Nomor 161/D/O/1995 tentang Status Terdaftar.",
+  "BAN-PT Nomor 019/BAN-PT/Ak-IV/VIII/2000 (10 Agustus 2000) Status Terakreditasi.",
+  "Perpanjangan Operasional DIKTI Nomor 71/D/T/K-III/2009.",
+  "Perpanjangan Izin Prodi Manajemen (Kopertis Wilayah III No. 2234/D/T/K-III/2009).",
+  "Perpanjangan Izin Prodi Akuntansi (Kopertis Wilayah III No. 305/D/T/K-III/2009).",
+  "BAN-PT Nomor 032/BAN-PT/Ak-XV/S1/X/2012 (18 Oktober 2012).",
+  "SK BAN-PT Nomor 16/SK/BAN-PT/Akred/S/I/2018 (3 Januari 2018) – Akreditasi Prodi Akuntansi.",
+  "SK BAN-PT Nomor 409/SK/BAN-PT/Akred/S/II/2018 (6 Februari 2018) – Akreditasi Prodi Manajemen.",
+  "Akreditasi Program Studi Tahun 2024.",
+  "Akreditasi Program Studi Tahun 2025.",
+  "Akreditasi Sementara Institusi Tahun 2026."
+];
 </script>
 
 <template>
   <div class="bg-white min-h-screen py-12 md:py-20">
     <div class="container mx-auto px-4 max-w-[1280px]">
-      <!-- Header Section -->
-      <div class="text-center mb-12 md:mb-16">
-        <span
-          class="text-primary-600 font-semibold tracking-wider uppercase text-sm mb-2 block"
-          >Profil Kampus</span
-        >
-        <h1
-          class="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight"
-        >
+
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <span class="text-primary-600 font-semibold tracking-wider uppercase text-sm mb-2 block">
+          Profil Kampus
+        </span>
+        <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
           Mengenal Lebih Dekat <br class="hidden md:block" />
-          STIE Tamansiswa Jakarta
+          STIE Taman Siswa Jakarta
         </h1>
-        <p
-          class="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed"
-        >
-          Lembaga pendidikan tinggi yang mengedepankan integritas, keunggulan
-          akademik, dan nilai-nilai luhur Taman Siswa.
+        <p class="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
+          Perguruan tinggi ekonomi berbasis nilai Ketamansiswaan yang unggul dan berdaya saing nasional.
         </p>
       </div>
 
-      <!-- Main Content Area (Medium-style layout) -->
       <div class="max-w-3xl mx-auto">
+
         <!-- Hero Image -->
-        <div
-          class="mb-12 rounded-2xl overflow-hidden shadow-xl aspect-video relative group"
-        >
+        <div class="mb-12 rounded-2xl overflow-hidden shadow-xl aspect-video relative group">
           <NuxtImg
             src="/img/sejarah.png"
-            alt="Gedung Kampus STIE Tamansiswa"
+            alt="Gedung Kampus STIE Taman Siswa Jakarta"
             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
             width="1200"
             height="800"
@@ -52,13 +63,11 @@ Dalam perjalanannya, STIE Taman Siswa Jakarta terus beradaptasi terhadap dinamik
             format="webp"
             loading="lazy"
           />
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"
-          ></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
         </div>
 
-        <!-- History Content -->
-        <div class="prose prose-lg prose-gray max-w-none mb-16">
+        <!-- History -->
+        <section class="prose prose-lg prose-gray max-w-none mb-16">
           <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
             Sejarah Singkat
           </h2>
@@ -67,64 +76,64 @@ Dalam perjalanannya, STIE Taman Siswa Jakarta terus beradaptasi terhadap dinamik
               {{ paragraph }}
             </p>
           </div>
-        </div>
+        </section>
 
-        <!-- Divider -->
-        <div class="w-full h-px bg-gray-200 my-12"></div>
+        <!-- Accreditation -->
+        <section class="mb-20">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+            Legalitas & Akreditasi
+          </h2>
 
-        <!-- Rector Profile Section -->
-        <div
-          class="bg-gray-50 rounded-3xl p-8 md:p-10 border border-gray-100 shadow-sm"
-        >
+          <div class="space-y-4">
+            <div
+              v-for="(item, index) in accreditations"
+              :key="index"
+              class="flex gap-4 p-4 rounded-xl border border-gray-100 hover:shadow-md transition"
+            >
+              <div class="w-8 h-8 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 font-bold">
+                {{ index + 1 }}
+              </div>
+              <p class="text-gray-600 leading-relaxed">
+                {{ item }}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Rector Section -->
+        <div class="bg-gray-50 rounded-3xl p-8 md:p-10 border border-gray-100 shadow-sm">
           <div class="flex flex-col md:flex-row items-center gap-8 md:gap-10">
-            <!-- Rector Photo -->
-            <div class="relative group flex-shrink-0">
-              <div
-                class="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-white shadow-lg relative z-10"
-              >
+
+            <div class="relative flex-shrink-0">
+              <div class="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-white shadow-lg">
                 <img
                   src="/img/sejarah/denis-kristianto.jpeg"
-                  alt="Foto Ketua STIE"
+                  alt="Ketua STIE Taman Siswa Jakarta"
                   class="w-full h-full object-cover"
                 />
               </div>
-              <!-- Decorative elements -->
-              <div
-                class="absolute -top-2 -right-2 w-12 h-12 bg-primary-100 rounded-full -z-0"
-              ></div>
-              <div
-                class="absolute -bottom-2 -left-2 w-16 h-16 bg-primary-50 rounded-full -z-0"
-              ></div>
             </div>
 
-            <!-- Rector Message -->
             <div class="text-center md:text-left flex-1">
-              <div class="mb-4">
-                <h3 class="text-2xl font-bold text-gray-900 mb-1">
-                  Denis Kristianto, S.E., M.M.
-                </h3>
-                <p
-                  class="text-primary-600 font-medium uppercase tracking-wide text-sm"
-                >
-                  Ketua STIE Taman Siswa Jakarta
-                </p>
-              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-1">
+                Denis Kristianto, S.E., M.M.
+              </h3>
+              <p class="text-primary-600 font-medium uppercase tracking-wide text-sm mb-4">
+                Ketua STIE Taman Siswa Jakarta
+              </p>
 
-              <blockquote class="text-gray-600 italic leading-relaxed relative text-center">
-                <span class="text-4xl text-gray-200 absolute -top-4 -left-2">"</span>
-                Kami bertekad untuk terus berinovasi dan memberikan layanan pendidikan terbaik bagi putra-putri bangsa. Mari bergabung bersama kami untuk masa depan yang gemilang.
-                <span class="text-4xl text-gray-200 absolute -bottom-8 -right-2">"</span>
+              <blockquote class="text-gray-600 italic leading-relaxed text-center md:text-left">
+                “Kami bertekad untuk terus berinovasi dan memberikan layanan pendidikan terbaik bagi putra-putri bangsa. Mari bergabung bersama kami untuk masa depan yang gemilang.”
               </blockquote>
             </div>
+
           </div>
         </div>
+
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* Custom typography adjustments if needed */
 </style>
-
-<style scoped></style>

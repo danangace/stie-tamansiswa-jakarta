@@ -21,14 +21,19 @@ const facultyMembers = [
     image: "/img/faculty-members/tamim-maruf.png",
   },
   {
+    name: "Ir. Tukirin, M.M.",
+    position: "Ketua Program Studi Manajemen",
+    image: "/img/faculty-members/tukirin.png",
+  },
+  {
+    name: "Ika Baskara, S.E., M.M.",
+    position: "Ketua Program Studi Akuntansi",
+    image: "/img/faculty-members/ika-baskara.png",
+  },
+  {
     name: "Gunadi, S.T., M.M.",
     position: "Ketua Bidang Kemahasiswaan",
     image: "/img/faculty-members/gunadi.png",
-  },
-  {
-    name: "Laela Rahmawati, S. Ak., M.Ak.",
-    position: "Kepala LPPM",
-    image: "/img/faculty-members/laela-rahmawati.png",
   },
   {
     name: "Rita Amelia, SE,MM,Ak,CA,CSFA",
@@ -41,24 +46,9 @@ const facultyMembers = [
     image: "/img/faculty-members/esti-setiati.png",
   },
   {
-    name: "Ika Baskara, S.E., M.M.",
-    position: "Ketua Program Studi Akuntansi",
-    image: "/img/faculty-members/ika-baskara.png",
-  },
-  {
-    name: "Ir. Tukirin, M.M.",
-    position: "Ketua Program Studi Manajemen",
-    image: "/img/faculty-members/tukirin.png",
-  },
-  {
-    name: "Dwi Respati Mardani, S.M.",
-    position: "Kepala Bagian Administrasi Akademik dan Admin Pusat Komputer",
-    image: "/img/faculty-members/dwi-respati-mardani.png",
-  },
-  {
-    name: "Harseno, S.Pd., Gr.",
-    position: "Kepala Bagian Administrasi Umum dan Keuangan",
-    image: "/img/faculty-members/harseno.png",
+    name: "Laela Rahmawati, S. Ak., M.Ak.",
+    position: "Kepala LPPM",
+    image: "/img/faculty-members/laela-rahmawati.png",
   },
   {
     name: "Endang Dwi Lestari, M.Pd",
@@ -81,14 +71,24 @@ const facultyMembers = [
     image: "/img/faculty-members/sonny-tri-aresta-april.png",
   },
   {
-    name: "Dadang Riski Marki, S.E.",
-    position: "Tata Usaha Administrasi Kemahasiswaan, Alumni, dan Perpustakaan",
-    image: "/img/faculty-members/dadang-riski-marki.png",
+    name: "Harseno, S.Pd., Gr.",
+    position: "Kepala Bagian Administrasi Umum dan Keuangan",
+    image: "/img/faculty-members/harseno.png",
+  },
+  {
+    name: "Dwi Respati Mardani, S.M.",
+    position: "Kepala Bagian Administrasi Akademik dan Admin Pusat Komputer",
+    image: "/img/faculty-members/dwi-respati-mardani.png",
   },
   {
     name: "Nur Almira Shinta Putri, A.Md.A.B.",
     position: "Tata Usaha Administrasi Akademik dan Kemahasiswaan",
     image: "/img/faculty-members/nur-almira-shinta-putri.png",
+  },
+  {
+    name: "Dadang Riski Marki, S.E.",
+    position: "Tata Usaha Administrasi Kemahasiswaan, Alumni, dan Perpustakaan",
+    image: "/img/faculty-members/dadang-riski-marki.png",
   },
 ];
 </script>
