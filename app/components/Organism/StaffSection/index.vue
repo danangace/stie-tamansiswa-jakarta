@@ -8,7 +8,7 @@ const staff = [
       "Kita tidak mencetak pengikut; kita menempa pemimpin yang berani berdiri demi kebenaran",
   },
   {
-    name: "Joko Suyono, S.Pd., M.Pd.",
+    name: "Joko Suyono, S.Si., M.Pd.",
     position: "Wakil Ketua I Bid. Akademik",
     image: "/img/staff/wk-i-stie.png",
     greeting: "Mari Lakukan yang terbaik selagi ada kesempatan, mulai dari diri sendiri dan mulai dari sekarang",

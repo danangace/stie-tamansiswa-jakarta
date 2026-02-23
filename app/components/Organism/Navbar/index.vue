@@ -36,10 +36,25 @@ const items = computed<NavigationMenuItem[]>(() => {
       active: route.path.startsWith("/kemahasiswaan"),
       class: "text-base",
       children: [
+        { label: "Kegiatan Kemahasiswaan", to: "/kemahasiswaan/kegiatan" },
         { label: "Form Pelacakan Alumni", to: "https://forms.gle/Qaj1qpYvZpUtTgvQ7", rel: "noopener", target: '_blank' },
         { label: "Form Pengguna Lulusan", to: "https://forms.gle/u2iqkcC8K5zXrmTu9", rel: "noopener", target: '_blank' },
+        { label: "Jurnal Publikasi Dosen", to: "https://sinta.kemdiktisaintek.go.id/affiliations/profile/1168", rel: "noopener", target: '_blank' }
       ],
     },
+    // {
+    //   label: "Berita",
+    //   to: "/berita",
+    //   active: route.path.startsWith("/berita"),
+    //   class: "text-base",
+    // },
+    // {
+    //   label: "Kemahasiswaan",
+    //   to: "/kemahasiswaan",
+    //   active: route.path.startsWith("/kemahasiswaan"),
+    //   class: "text-base",
+    // },
+
 
     // 🔥 MENU BARU PMB
     {
