@@ -33,6 +33,17 @@ const items = computed<NavigationMenuItem[]>(() => {
         { label: "S1 Akuntansi", icon: "i-lucide-calculator", to: "/program-studi/akuntansi" },
       ],
     },
+    {
+      label: "Kemahasiswaan",
+      active: route.path.startsWith("/kemahasiswaan"),
+      class: "text-base",
+      children: [
+        { label: "Kegiatan Kemahasiswaan", to: "/kemahasiswaan/kegiatan" },
+        { label: "Form Pelacakan Alumni", to: "https://forms.gle/Qaj1qpYvZpUtTgvQ7", rel: "noopener" },
+        { label: "Form Pengguna Lulusan", to: "https://forms.gle/u2iqkcC8K5zXrmTu9", rel: "noopener" },
+        { label: "Jurnal Publikasi Dosen", to: "https://sinta.kemdiktisaintek.go.id/affiliations/profile/1168", rel: "noopener" }
+      ],
+    },
     // {
     //   label: "Berita",
     //   to: "/berita",
@@ -45,15 +56,7 @@ const items = computed<NavigationMenuItem[]>(() => {
     //   active: route.path.startsWith("/kemahasiswaan"),
     //   class: "text-base",
     // },
-    {
-      label: "Kemahasiswaan",
-      active: route.path.startsWith("/kemahasiswaan"),
-      class: "text-base",
-      children: [
-        { label: "Form Pelacakan Alumni", to: "https://forms.gle/Qaj1qpYvZpUtTgvQ7", rel: "noopener" },
-        { label: "Form Pengguna Lulusan", to: "https://forms.gle/u2iqkcC8K5zXrmTu9", rel: "noopener" },
-      ],
-    },
+    
 
     // 🔥 MENU BARU PMB
     {
