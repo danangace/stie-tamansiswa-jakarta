@@ -46,7 +46,7 @@ const activities = [
   {
     title: "Buka Bersama",
     subtitle: "STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/BukaBersama-STIETamanSiswaJakarta.jpeg",
+    image: "/img/kegiatan-kemahasiswaan/BukaBersama-StieTamanSiswaJakarta.jpeg",
   },
   {
     title: "Jalan Santai",
