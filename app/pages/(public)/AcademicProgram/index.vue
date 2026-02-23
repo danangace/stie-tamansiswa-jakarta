@@ -76,29 +76,55 @@
     <!-- ================= VISI MISI ================= -->
     <section class="py-20 bg-white dark:bg-gray-800">
       <UContainer>
+
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Visi & Misi
+          </h2>
+          <p class="text-gray-500 dark:text-gray-400">
+            Arah dan tujuan Program Studi {{ prodiData?.name }}
+          </p>
+        </div>
+
         <div class="grid md:grid-cols-2 gap-8">
 
           <!-- Visi -->
-          <UCard>
+          <UCard class="border-t-4 border-primary-500">
             <template #header>
-              <h3 class="text-2xl font-bold">Visi</h3>
+              <div class="flex items-center gap-3">
+                <div class="p-2 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+                  <UIcon name="i-heroicons-eye" class="text-primary-600 w-6 h-6" />
+                </div>
+                <h3 class="text-2xl font-bold">Visi</h3>
+              </div>
             </template>
-            <p>{{ prodiData?.vision }}</p>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              {{ prodiData?.vision }}
+            </p>
           </UCard>
 
           <!-- Misi -->
-          <UCard>
+          <UCard class="border-t-4 border-primary-500">
             <template #header>
-              <h3 class="text-2xl font-bold">Misi</h3>
+              <div class="flex items-center gap-3">
+                <div class="p-2 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+                  <UIcon name="i-heroicons-rocket-launch" class="text-primary-600 w-6 h-6" />
+                </div>
+                <h3 class="text-2xl font-bold">Visi</h3>
+              </div>
             </template>
-            <ul class="space-y-3">
+            <ul class="space-y-4">
               <li
                 v-for="(mission, index) in prodiData?.missions"
                 :key="index"
-                class="flex gap-3"
+                class="flex gap-4 items-start"
               >
-                <UBadge size="xs">{{ index + 1 }}</UBadge>
-                <span>{{ mission }}</span>
+                <span class="flex-shrink-0 w-7 h-7 rounded-full bg-primary-600 text-white text-sm font-bold flex items-center justify-center mt-0.5">
+                  {{ index + 1 }}
+                </span>
+                <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {{ mission }}
+                </p>
               </li>
             </ul>
           </UCard>
@@ -133,7 +159,7 @@
 
         <div class="text-center mb-10">
           <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            Akreditasi BAN-PT
+            Akreditasi LAMEMBA
           </h2>
 
           <p class="text-gray-600 dark:text-gray-400">
@@ -181,16 +207,16 @@ const prodiList: ProdiData[] = [
     name: "Akuntansi",
     department: "Fakultas Ekonomi dan Bisnis",
     description: "Program studi Akuntansi yang menghasilkan lulusan profesional.",
-    vision: "Menjadi program studi akuntansi unggulan.",
+    vision: "Pada tahun 2025, menjadi Program Studi yang menghasilkan lulusan yang mampu menyinergikan perkembangan Ilmu Akuntansi dengan perkembangan Teknologi Informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan",
     missions: [
-      "Menyelenggarakan pendidikan berkualitas",
-      "Mengembangkan penelitian",
-      "Menghasilkan lulusan profesional",
-      "Membangun kerja sama industri"
+      "Menyelenggarakan Pendidikan dan pengajaran dengan menghasilkan lulusan yang mampu menyinergikan perkembangan ilmu akuntasi dengan perkembangan teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan",
+      "Menyelenggarakan kegiatan penelitian secara kreatif dan inovatif untuk menyinergikan perkembangan ilmu Akuntansi dengan perkembangan teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan",
+      "Menyelenggarakan kegiatan pengabdian masyarakat yang berbasis pada sinerginya perkembangan ilmu Akuntansi dengan perkembangan teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan",
+      "Melakukan kerjasama baik dalam dan luar negeri guna mendukung kegiatan tridharma perguruan tinggi",
     ],
     statistics: [
       { label: "Mahasiswa Aktif", value: "50+" },
-      { label: "Dosen Tetap", value: "10" },
+      { label: "Dosen Tetap", value: "5" },
       { label: "Alumni", value: "2K+" },
       { label: "Mitra Industri", value: "5+" }
     ],
@@ -209,16 +235,16 @@ const prodiList: ProdiData[] = [
     name: "Manajemen",
     department: "Fakultas Ekonomi dan Bisnis",
     description: "Program studi Manajemen berfokus pada kepemimpinan.",
-    vision: "Menjadi program studi manajemen unggulan.",
+    vision: "Pada tahun 2025, menjadi Program Studi yang menghasilkan lulusan yang mampu menyinergikan perkembangan ilmu Manajemen dengan perkembangan Teknologi Informasi dan mengembangkan jiwa wirausaha berdasarkan ketamansiswaan",
     missions: [
-      "Pendidikan berbasis praktik",
-      "Pengembangan riset",
-      "Mendorong kewirausahaan",
-      "Kemitraan strategis"
+      "Menyelenggarakan pendidikan dan pengajaran dengan menghasilkan lulusan yang mampu menyinergikan perkembangan ilmu manajemen dengan perkembangan teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan",
+      "Menyelenggarakan kegiatan penelitian secara kreatif dan inovatif untuk menyinergikan perkembangan ilmu manajemen dengan perkembangan teknologi informasi  dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan",
+      "Menyelenggarakan kegiatan pengabdian masyarakat yang berbasis pada sinerginya perkembangan ilmu manajemen dengan perkembangan teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan",
+      "Melakukan kerjasama baik dalam dan luar negeri guna mendukung kegiatan tridharma perguruan tinggi",
     ],
     statistics: [
       { label: "Mahasiswa Aktif", value: "200+" },
-      { label: "Dosen Tetap", value: "15" },
+      { label: "Dosen Tetap", value: "5" },
       { label: "Alumni", value: "3K+" },
       { label: "Mitra Industri", value: "10+" }
     ],

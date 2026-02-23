@@ -5,15 +5,14 @@ definePageMeta({
 });
 
 const vision = `
-Menjadi perguruan tinggi unggul dan berdaya saing nasional dalam Akuntansi dan Manajemen berbasis transformasi digital, yang melahirkan wirausahawan berintegritas dan berkarakter luhur berdasarkan prinsip Ketamansiswaan.
+Pada tahun 2025, STIE Taman Siswa menjadi Perguruan Tinggi yang mampu menyinergikan Perkembangan Ilmu Akuntansi dan Manajemen dengan perkembangan Teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan
 `;
 
 const missions = [
-  "Menyelenggarakan pendidikan berbasis transformasi digital yang adaptif dan berkualitas.",
-  "Mengembangkan penelitian inovatif di bidang Akuntansi dan Manajemen.",
-  "Melaksanakan pengabdian kepada masyarakat berbasis pemberdayaan ekonomi.",
-  "Mewujudkan tata kelola institusi yang profesional, transparan, dan akuntabel.",
-  "Menanamkan nilai Ketamansiswaan dalam pembentukan karakter mahasiswa."
+  "Menyelenggarakan kegiatan belajar mengajar secara kreatif dan inovatif dalam rangka menyinergikan perkembangan ilmu Akuntansi dan Manajemen dengan perkembangan teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan",
+  "Menyelenggarakan kegiatan penelitian secara kreatif dan inovatif untuk menyinergikan perkembangan ilmu Akuntansi dan Manajemen dengan perkembangan teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan",
+  "Menyelenggarakan kegiatan pengabdian masyarakat yang berbasis pada sinerginya perkembangan ilmu Akuntansi dan Manajemen dengan perkembangan teknologi informasi dan mengembangkan jiwa wirausaha berdasarkan prinsip ketamansiswaan",
+  "Melakukan kerjasama baik dalam dan luar negeri guna mendukung kegiatan tridharma perguruan tinggi",
 ];
 
 const coreValues = [
