@@ -13,6 +13,16 @@
 }
 
 /* ========================================
+   Dark Mode Scrollbar Overrides
+   ======================================== */
+.dark {
+  --scrollbar-track-bg: var(--color-neutral-400);
+  --scrollbar-thumb-bg: var(--color-neutral-600);
+  --scrollbar-thumb-hover-bg: var(--color-neutral-700);
+  --scrollbar-thumb-active-bg: var(--color-neutral-800);
+}
+
+/* ========================================
    Modern Scrollbar (Firefox + Webkit)
    ======================================== */
 * {

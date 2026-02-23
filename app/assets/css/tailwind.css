@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+@custom-variant dark (&:is(.dark *));
+
 @import "./color.css";
 @import "./scrollbar.css";
 @import "./typograhpy.css";

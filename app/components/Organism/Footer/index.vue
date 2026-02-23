@@ -3,7 +3,7 @@ const currentYear = new Date().getFullYear();
 </script>
 
 <template>
-  <footer class="bg-gray-900 text-gray-300">
+  <footer class="bg-gray-900 dark:bg-gray-950 text-gray-300">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
 
       <!-- Top Section -->
@@ -26,17 +26,10 @@ const currentYear = new Date().getFullYear();
           <p class="text-lg font-semibold text-white mb-3">
             Ikuti Kami
           </p>
-          <a
-            href="https://instagram.com/stie_tamsisjakarta"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center space-x-3 
+          <a href="https://instagram.com/stie_tamsisjakarta" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-3 
                    text-gray-400 hover:text-pink-500 
-                   transition-all duration-300 group"
-          >
-            <!-- <div class="p-2 rounded-lg bg-gray-800 group-hover:bg-pink-500/10 transition"> -->
-              <Icon name="fa-brands:instagram" class="w-5 h-5" />
-            <!-- </div> -->
+                   transition-all duration-300 group">
+            <Icon name="fa-brands:instagram" class="w-5 h-5" />
             <span class="text-base font-medium group-hover:underline">
               @stie_tamsisjakarta
             </span>
@@ -50,18 +43,12 @@ const currentYear = new Date().getFullYear();
           </h3>
           <ul class="space-y-4">
             <li>
-              <a
-                href="https://forms.gle/ZJbng9btnGg6HA2B6"
-                class="hover:text-white transition-colors"
-              >
+              <a href="https://forms.gle/ZJbng9btnGg6HA2B6" class="hover:text-white transition-colors">
                 Form Pendaftaran Mahasiswa Baru (PMB)
               </a>
             </li>
             <li>
-              <a
-                href="https://jeb.stieykpn.ac.id/index.php/jeb"
-                class="hover:text-white transition-colors"
-              >
+              <a href="https://jeb.stieykpn.ac.id/index.php/jeb" class="hover:text-white transition-colors">
                 Jurnal Bisnis dan Ekonomi
               </a>
             </li>
@@ -75,18 +62,12 @@ const currentYear = new Date().getFullYear();
           </h3>
           <ul class="space-y-4">
             <li>
-              <a
-                href="/program-studi/manajemen"
-                class="hover:text-white transition-colors"
-              >
+              <a href="/program-studi/manajemen" class="hover:text-white transition-colors">
                 S1 Manajemen
               </a>
             </li>
             <li>
-              <a
-                href="/program-studi/akuntansi"
-                class="hover:text-white transition-colors"
-              >
+              <a href="/program-studi/akuntansi" class="hover:text-white transition-colors">
                 S1 Akuntansi
               </a>
             </li>
@@ -104,10 +85,7 @@ const currentYear = new Date().getFullYear();
             <!-- Alamat -->
             <li>
               <div class="flex items-start space-x-3">
-                <UIcon 
-                  name="i-heroicons-map-pin" 
-                  class="w-5 h-5 shrink-0 mt-1"
-                />
+                <UIcon name="i-heroicons-map-pin" class="w-5 h-5 shrink-0 mt-1" />
                 <span>
                   Jl. Garuda No. 25, Kemayoran, Jakarta Pusat
                 </span>
@@ -116,33 +94,26 @@ const currentYear = new Date().getFullYear();
 
             <!-- Telepon Kantor -->
             <li>
-              <a 
-                href="tel:0214265630"
-                class="flex items-center space-x-3 hover:text-white transition-colors"
-              >
-                <UIcon name="i-heroicons-phone" class="w-5 h-5 shrink-0"/>
+              <a href="tel:0214265630" class="flex items-center space-x-3 hover:text-white transition-colors">
+                <UIcon name="i-heroicons-phone" class="w-5 h-5 shrink-0" />
                 <span>(021) 4265630</span>
               </a>
             </li>
 
             <!-- HP -->
             <li>
-              <a 
-                href="https://wa.me/6281318222894"
-                class="flex items-center space-x-3 hover:text-white transition-colors"
-              >
-                <UIcon name="i-heroicons-device-phone-mobile" class="w-5 h-5 shrink-0"/>
+              <a href="https://wa.me/6281318222894"
+                class="flex items-center space-x-3 hover:text-white transition-colors">
+                <UIcon name="i-heroicons-device-phone-mobile" class="w-5 h-5 shrink-0" />
                 <span>081318222894</span>
               </a>
             </li>
 
             <!-- Email -->
             <li>
-              <a 
-                href="mailto:stiejakartatamsis@gmail.com"
-                class="flex items-center space-x-3 hover:text-white transition-colors"
-              >
-                <UIcon name="i-heroicons-envelope" class="w-5 h-5 shrink-0"/>
+              <a href="mailto:stiejakartatamsis@gmail.com"
+                class="flex items-center space-x-3 hover:text-white transition-colors">
+                <UIcon name="i-heroicons-envelope" class="w-5 h-5 shrink-0" />
                 <span>stiejakartatamsis@gmail.com</span>
               </a>
             </li>
@@ -151,7 +122,7 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <!-- Bottom -->
-      <div class="mt-16 pt-8 border-t border-gray-800 text-center">
+      <div class="mt-16 pt-8 border-t border-gray-800 dark:border-gray-700 text-center">
         <p class="text-sm text-gray-500">
           &copy; {{ currentYear }} STIE Tamansiswa Jakarta. All rights reserved.
         </p>

@@ -13,7 +13,7 @@ console.log("Current route path:", route.path);
 </script>
 
 <template>
-  <div class="bg-white">
+  <div class="bg-white dark:bg-neutral-900">
     <HeroSection />
     <PartnerSection />
     <StaffSection />

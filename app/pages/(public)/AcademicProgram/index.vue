@@ -31,11 +31,7 @@
             <!-- Foto -->
             <div>
               <div class="relative overflow-hidden rounded-3xl shadow-2xl">
-                <img
-                  :src="kaprodiData?.photo"
-                  :alt="kaprodiData?.name"
-                  class="w-full object-cover aspect-[3/4]"
-                />
+                <img :src="kaprodiData?.photo" :alt="kaprodiData?.name" class="w-full object-cover aspect-[3/4]" />
               </div>
             </div>
 
@@ -92,12 +88,11 @@
               <h3 class="text-2xl font-bold">Misi</h3>
             </template>
             <ul class="space-y-3">
-              <li
-                v-for="(mission, index) in prodiData?.missions"
-                :key="index"
-                class="flex gap-3"
-              >
-                <UBadge size="xs">{{ index + 1 }}</UBadge>
+              <li v-for="(mission, index) in prodiData?.missions" :key="index" class="flex items-center gap-3">
+                <span
+                  class="flex-shrink-0 w-7 h-7 bg-primary-100 dark:bg-primary-800/30 text-primary-600 dark:text-primary-300 rounded-full flex items-center justify-center text-sm font-bold">
+                  {{ index + 1 }}
+                </span>
                 <span>{{ mission }}</span>
               </li>
             </ul>
@@ -111,11 +106,7 @@
     <section class="py-20">
       <UContainer>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <UCard
-            v-for="stat in prodiData?.statistics"
-            :key="stat.label"
-            class="text-center"
-          >
+          <UCard v-for="stat in prodiData?.statistics" :key="stat.label" class="text-center">
             <div class="text-3xl font-bold text-primary-600">
               {{ stat.value }}
             </div>
@@ -142,11 +133,8 @@
         </div>
 
         <div class="w-full rounded-xl overflow-hidden shadow-xl">
-          <img
-            :src="prodiData?.accreditationImg"
-            :alt="'Sertifikat Akreditasi ' + prodiData?.name"
-            class="w-full h-auto object-contain"
-          />
+          <img :src="prodiData?.accreditationImg" :alt="'Sertifikat Akreditasi ' + prodiData?.name"
+            class="w-full h-auto object-contain" />
         </div>
       </UContainer>
     </section>
