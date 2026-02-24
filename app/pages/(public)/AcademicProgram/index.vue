@@ -106,7 +106,7 @@
                 <div class="p-2 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
                   <UIcon name="i-heroicons-rocket-launch" class="text-primary-600 w-6 h-6" />
                 </div>
-                <h3 class="text-2xl font-bold">Visi</h3>
+                <h3 class="text-2xl font-bold">Misi</h3>
               </div>
             </template>
             <ul class="space-y-3">
