@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan: PMB (Penerimaan Mahasiswa Baru)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: #1f2937; background: #f9fafb; padding: 32px; line-height: 1.6; }
+    h1 { font-size: 28px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+    h2 { font-size: 18px; font-weight: 700; color: #111827; margin: 32px 0 12px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; }
+    h3 { font-size: 14px; font-weight: 700; color: #374151; margin: 16px 0 8px; }
+    .subtitle { color: #6b7280; font-size: 13px; margin-bottom: 32px; }
+    .section { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: #f3f4f6; text-align: left; padding: 8px 12px; font-weight: 600; color: #374151; border: 1px solid #e5e7eb; }
+    td { padding: 8px 12px; border: 1px solid #e5e7eb; vertical-align: top; }
+    tr:hover td { background: #f9fafb; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-size: 11px; font-weight: 600; }
+    .badge-required { background: #fee2e2; color: #b91c1c; }
+    .badge-optional { background: #fef9c3; color: #92400e; }
+    .badge-baru { background: #dbeafe; color: #1d4ed8; }
+    .badge-pindahan { background: #f3e8ff; color: #6d28d9; }
+    .badge-new { background: #d1fae5; color: #065f46; }
+    .badge-warning { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; }
+    .card h3 { margin-top: 0; color: #1d4ed8; }
+    ul { padding-left: 20px; }
+    li { margin-bottom: 4px; }
+    .note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 10px 14px; border-radius: 4px; font-size: 13px; margin: 12px 0; color: #78350f; }
+    .note strong { color: #92400e; }
+    .flow { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
+    .flow-item { background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; padding: 6px 14px; font-size: 13px; font-weight: 500; }
+    .flow-arrow { font-size: 18px; color: #9ca3af; line-height: 32px; }
+    .status-menunggu { background: #f3f4f6; color: #374151; }
+    .status-diproses { background: #dbeafe; color: #1d4ed8; }
+    .status-diterima { background: #d1fae5; color: #065f46; }
+    .status-ditolak { background: #fee2e2; color: #b91c1c; }
+    code { background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; color: #0f172a; }
+    .file-list { display: flex; flex-direction: column; gap: 4px; }
+    .file-item { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px 10px; font-size: 12px; font-family: monospace; }
+  </style>
+</head>
+<body>
+
+  <h1>Plan: PMB — Penerimaan Mahasiswa Baru</h1>
+  <p class="subtitle">Sistem pendaftaran mahasiswa baru dengan dua jalur: <strong>Baru</strong> dan <strong>Pindahan/Mutasi</strong></p>
+
+  <!-- ASUMSI -->
+  <div class="note">
+    <strong>⚠️ Asumsi yang perlu dikonfirmasi:</strong>
+    <ul style="margin-top:8px;">
+      <li><strong>NAMA BERDOMISILI</strong> → diasumsikan sebagai <em>alamat lengkap tempat tinggal</em></li>
+      <li><strong>NAMA REFERENSI (SESUAI KTP)</strong> → diasumsikan nama orang yang mereferensikan si pendaftar ke STIE</li>
+      <li><strong>PRINTOUT BIODATA DI PP/KTI</strong> → field upload dokumen, diasumsikan biodata dari sistem kampus sebelumnya. Tolong konfirmasi kepanjangan PP/KTI.</li>
+      <li><strong>KARTU TANDA ANGGOTA</strong> di pindahan → diasumsikan KTM (Kartu Tanda Mahasiswi) dari kampus sebelumnya</li>
+      <li><strong>Admin dashboard</strong> → diasumsikan ada fitur ubah status (Menunggu → Diproses → Diterima/Ditolak) + catatan admin</li>
+    </ul>
+  </div>
+
+  <!-- STATUS PENGERJAAN -->
+  <h2>Status Pengerjaan</h2>
+  <div class="section">
+    <table>
+      <thead>
+        <tr>
+          <th>Bagian</th>
+          <th>Database</th>
+          <th>Halaman Form Publik</th>
+          <th>Admin Dashboard</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PMB — Form Baru</td>
+          <td>⬜</td>
+          <td>⬜ <code>/pmb/baru</code></td>
+          <td>⬜</td>
+        </tr>
+        <tr>
+          <td>PMB — Form Pindahan</td>
+          <td>⬜</td>
+          <td>⬜ <code>/pmb/pindahan</code></td>
+          <td>⬜</td>
+        </tr>
+        <tr>
+          <td>Admin PMB List</td>
+          <td>—</td>
+          <td>—</td>
+          <td>⬜ <code>/admin/pmb</code></td>
+        </tr>
+        <tr>
+          <td>Admin PMB Detail</td>
+          <td>—</td>
+          <td>—</td>
+          <td>⬜ <code>/admin/pmb/[id]</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DATABASE SCHEMA -->
+  <h2>1. Database Schema (Supabase)</h2>
+
+  <div class="section">
+    <h3>Tabel <code>pmb_pendaftar</code> — induk semua pendaftar</h3>
+    <table>
+      <thead><tr><th>Kolom</th><th>Tipe</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>uuid PK</td><td>auto-generated</td></tr>
+        <tr><td><code>tipe</code></td><td>text</td><td><code>'baru'</code> atau <code>'pindahan'</code></td></tr>
+        <tr><td><code>status</code></td><td>text</td><td><code>'menunggu'</code> | <code>'diproses'</code> | <code>'diterima'</code> | <code>'ditolak'</code> — default <code>'menunggu'</code></td></tr>
+        <tr><td><code>catatan_admin</code></td><td>text</td><td>Catatan internal admin, nullable</td></tr>
+        <tr><td><code>created_at</code></td><td>timestamptz</td><td>auto</td></tr>
+        <tr><td><code>updated_at</code></td><td>timestamptz</td><td>auto (trigger)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note" style="margin-top:16px;">
+      Tabel ini adalah <em>parent</em>. Data spesifik jalur disimpan di <code>pmb_baru</code> atau <code>pmb_pindahan</code> dengan relasi 1:1 via <code>pendaftar_id</code>.
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Tabel <code>pmb_baru</code> — data pendaftar jalur BARU</h3>
+    <table>
+      <thead><tr><th>Kolom</th><th>Tipe</th><th>Wajib?</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td colspan="4" style="background:#eff6ff;font-weight:600;color:#1d4ed8;">Data Calon Mahasiswi</td></tr>
+        <tr><td><code>pendaftar_id</code></td><td>uuid FK</td><td><span class="badge badge-required">wajib</span></td><td>→ <code>pmb_pendaftar.id</code></td></tr>
+        <tr><td><code>nama</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>jenis_kelamin</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td><code>'Laki-Laki'</code> | <code>'Perempuan'</code></td></tr>
+        <tr><td><code>agama</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>program_studi</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td><code>'manajemen'</code> | <code>'akuntansi'</code></td></tr>
+        <tr><td><code>nisn</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Nomor Induk Siswa Nasional</td></tr>
+        <tr><td><code>nik</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Nomor Induk Kependudukan</td></tr>
+        <tr><td><code>tempat_lahir</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>tanggal_lahir</code></td><td>date</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>alamat_domisili</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Nama/alamat berdomisili</td></tr>
+        <tr><td><code>status_pernikahan</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td><code>'lajang'</code> | <code>'menikah'</code> | <code>'lainnya'</code></td></tr>
+        <tr><td><code>status_pernikahan_lainnya</code></td><td>text</td><td><span class="badge badge-optional">opsional</span></td><td>Diisi jika status = lainnya</td></tr>
+        <tr><td><code>nama_referensi</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Nama orang yang mereferensikan</td></tr>
+        <tr><td><code>pekerjaan</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>no_hp</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Nomor HP/WhatsApp aktif</td></tr>
+
+        <tr><td colspan="4" style="background:#f0fdf4;font-weight:600;color:#065f46;">Data Akademik</td></tr>
+        <tr><td><code>nama_sma</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Nama SMA/SMK/MTs</td></tr>
+        <tr><td><code>jurusan_sma</code></td><td>text</td><td><span class="badge badge-optional">opsional *</span></td><td>IPA / IPS — kosongkan jika tidak ada</td></tr>
+        <tr><td><code>tahun_masuk_sma</code></td><td>integer</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>tahun_lulus_sma</code></td><td>integer</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+
+        <tr><td colspan="4" style="background:#fdf4ff;font-weight:600;color:#6d28d9;">Data Orang Tua / Wali</td></tr>
+        <tr><td><code>nama_ibu_kandung</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>nama_wali</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Nama orang tua / wali</td></tr>
+        <tr><td><code>no_hp_wali</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Nomor HP/WhatsApp wali aktif</td></tr>
+        <tr><td><code>pekerjaan_ayah</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>penghasilan_rata_rata</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Penghasilan rata-rata per bulan (jumlah dibagi 3 orang)</td></tr>
+
+        <tr><td colspan="4" style="background:#fff7ed;font-weight:600;color:#c2410c;">Upload Berkas</td></tr>
+        <tr><td><code>berkas_ijazah_url</code></td><td>text</td><td><span class="badge badge-optional">opsional *</span></td><td>Ijazah / SKL (untuk yang sudah lulus)</td></tr>
+        <tr><td><code>berkas_ktp_url</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>KTP Mahasiswi</td></tr>
+        <tr><td><code>berkas_kk_url</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Kartu Keluarga</td></tr>
+        <tr><td><code>berkas_akte_url</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Akte Kelahiran</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h3>Tabel <code>pmb_pindahan</code> — data pendaftar jalur PINDAHAN / MUTASI</h3>
+    <table>
+      <thead><tr><th>Kolom</th><th>Tipe</th><th>Wajib?</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td colspan="4" style="background:#eff6ff;font-weight:600;color:#1d4ed8;">Data Mahasiswi Pindahan</td></tr>
+        <tr><td><code>pendaftar_id</code></td><td>uuid FK</td><td><span class="badge badge-required">wajib</span></td><td>→ <code>pmb_pendaftar.id</code></td></tr>
+        <tr><td><code>nama</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>jenis_kelamin</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td><code>'Laki-Laki'</code> | <code>'Perempuan'</code></td></tr>
+        <tr><td><code>nik</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>NIK sesuai KTP</td></tr>
+        <tr><td><code>nim_lama</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>NIM / NPM dari kampus sebelumnya</td></tr>
+        <tr><td><code>tempat_lahir</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>tanggal_lahir</code></td><td>date</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>agama</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>status_pernikahan</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td><code>'lajang'</code> | <code>'menikah'</code> | <code>'lainnya'</code></td></tr>
+        <tr><td><code>status_pernikahan_lainnya</code></td><td>text</td><td><span class="badge badge-optional">opsional</span></td><td>Diisi jika status = lainnya</td></tr>
+        <tr><td><code>pekerjaan</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>nama_referensi</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Nama orang yang mereferensikan</td></tr>
+        <tr><td><code>no_hp</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Nomor HP/WhatsApp aktif</td></tr>
+
+        <tr><td colspan="4" style="background:#f0fdf4;font-weight:600;color:#065f46;">Data Akademik</td></tr>
+        <tr><td><code>nama_kampus_lama</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td>Nama kampus / universitas sebelumnya</td></tr>
+        <tr><td><code>program_studi_lama</code></td><td>text</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+        <tr><td><code>tahun_masuk_lama</code></td><td>integer</td><td><span class="badge badge-required">wajib</span></td><td></td></tr>
+
+        <tr><td colspan="4" style="background:#fff7ed;font-weight:600;color:#c2410c;">Upload Berkas — Semua Opsional (Tidak Wajib)</td></tr>
+        <tr><td><code>berkas_surat_tugas_url</code></td><td>text</td><td><span class="badge badge-optional">opsional</span></td><td>Surat tugas dari kampus sebelumnya</td></tr>
+        <tr><td><code>berkas_transkrip_url</code></td><td>text</td><td><span class="badge badge-optional">opsional</span></td><td>Transkrip nilai kampus sebelumnya</td></tr>
+        <tr><td><code>berkas_biodata_pp_kti_url</code></td><td>text</td><td><span class="badge badge-optional">opsional</span></td><td>Printout biodata di PP/KTI <em>(perlu konfirmasi)</em></td></tr>
+        <tr><td><code>berkas_kta_url</code></td><td>text</td><td><span class="badge badge-optional">opsional</span></td><td>Kartu Tanda Anggota / KTM kampus sebelumnya <em>(perlu konfirmasi)</em></td></tr>
+        <tr><td><code>berkas_kk_url</code></td><td>text</td><td><span class="badge badge-optional">opsional</span></td><td>Kartu Keluarga</td></tr>
+        <tr><td><code>berkas_akte_url</code></td><td>text</td><td><span class="badge badge-optional">opsional</span></td><td>Akte Kelahiran</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- RLS -->
+  <div class="section">
+    <h3>Row Level Security (RLS)</h3>
+    <table>
+      <thead><tr><th>Tabel</th><th>Public INSERT</th><th>Public SELECT</th><th>Auth (Admin) ALL</th></tr></thead>
+      <tbody>
+        <tr><td><code>pmb_pendaftar</code></td><td>✅ (siapapun bisa daftar)</td><td>❌ (hanya admin)</td><td>✅</td></tr>
+        <tr><td><code>pmb_baru</code></td><td>✅</td><td>❌</td><td>✅</td></tr>
+        <tr><td><code>pmb_pindahan</code></td><td>✅</td><td>❌</td><td>✅</td></tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:12px;">Data pendaftar bersifat sensitif — hanya admin yang bisa membaca. Public hanya bisa INSERT (submit form).</div>
+  </div>
+
+  <!-- STORAGE -->
+  <div class="section">
+    <h3>Supabase Storage — Bucket <code>media</code></h3>
+    <div class="file-list">
+      <div class="file-item">media/pmb/baru/{pendaftar_id}/ijazah.{ext}</div>
+      <div class="file-item">media/pmb/baru/{pendaftar_id}/ktp.{ext}</div>
+      <div class="file-item">media/pmb/baru/{pendaftar_id}/kk.{ext}</div>
+      <div class="file-item">media/pmb/baru/{pendaftar_id}/akte.{ext}</div>
+      <div class="file-item">media/pmb/pindahan/{pendaftar_id}/surat-tugas.{ext}</div>
+      <div class="file-item">media/pmb/pindahan/{pendaftar_id}/transkrip.{ext}</div>
+      <div class="file-item">media/pmb/pindahan/{pendaftar_id}/biodata-pp-kti.{ext}</div>
+      <div class="file-item">media/pmb/pindahan/{pendaftar_id}/kta.{ext}</div>
+      <div class="file-item">media/pmb/pindahan/{pendaftar_id}/kk.{ext}</div>
+      <div class="file-item">media/pmb/pindahan/{pendaftar_id}/akte.{ext}</div>
+    </div>
+    <div class="note" style="margin-top:10px;">File diorganisir per <code>pendaftar_id</code> agar mudah ditelusuri. Bucket tetap private (hanya admin bisa baca via signed URL).</div>
+  </div>
+
+  <!-- HALAMAN PUBLIK -->
+  <h2>2. Halaman Form Publik</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Landing — <code>/pmb</code> atau <code>/form-pmb</code></h3>
+      <p style="color:#6b7280;font-size:13px;margin-bottom:10px;">Halaman pilihan jalur pendaftaran</p>
+      <ul>
+        <li>Dua tombol besar: <strong>BARU</strong> dan <strong>PINDAHAN</strong></li>
+        <li>Brief info syarat masing-masing jalur</li>
+        <li>Link ke form masing-masing</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Form Baru — <code>/pmb/baru</code></h3>
+      <p style="color:#6b7280;font-size:13px;margin-bottom:10px;">Form multi-section dengan scroll</p>
+      <ul>
+        <li>Section 1: Data Calon Mahasiswi</li>
+        <li>Section 2: Data Akademik</li>
+        <li>Section 3: Data Orang Tua / Wali</li>
+        <li>Section 4: Upload Berkas</li>
+        <li>Validasi wajib sebelum submit</li>
+        <li>Halaman sukses dengan nomor pendaftaran</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Form Pindahan — <code>/pmb/pindahan</code></h3>
+      <p style="color:#6b7280;font-size:13px;margin-bottom:10px;">Form multi-section dengan scroll</p>
+      <ul>
+        <li>Section 1: Data Mahasiswi Pindahan</li>
+        <li>Section 2: Data Akademik Kampus Lama</li>
+        <li>Section 3: Upload Berkas (semua opsional)</li>
+        <li>Validasi wajib sebelum submit</li>
+        <li>Halaman sukses dengan nomor pendaftaran</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Halaman Sukses — <code>/pmb/sukses</code></h3>
+      <p style="color:#6b7280;font-size:13px;margin-bottom:10px;">Konfirmasi setelah submit</p>
+      <ul>
+        <li>Tampilkan nomor pendaftaran (ID)</li>
+        <li>Instruksi langkah selanjutnya</li>
+        <li>Kontak admin jika ada pertanyaan</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ADMIN DASHBOARD -->
+  <h2>3. Admin Dashboard</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>List Pendaftar — <code>/admin/pmb</code></h3>
+      <ul>
+        <li>Tabel semua pendaftar</li>
+        <li>Kolom: Tanggal, Nama, Tipe, Program Studi, Status</li>
+        <li>Filter: tipe (baru/pindahan), status, tanggal</li>
+        <li>Search by nama / NIK</li>
+        <li>Klik baris → buka detail</li>
+        <li>Badge status berwarna</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Detail Pendaftar — <code>/admin/pmb/[id]</code></h3>
+      <ul>
+        <li>Tampilkan semua data yang diisi</li>
+        <li>Preview / download berkas yang diupload</li>
+        <li>Ubah status: Menunggu → Diproses → Diterima / Ditolak</li>
+        <li>Input catatan admin</li>
+        <li>Tombol kembali ke list</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:16px;">
+    <h3>Alur Status</h3>
+    <div class="flow">
+      <div class="flow-item status-menunggu">⏳ Menunggu</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item status-diproses">🔄 Diproses</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item status-diterima">✅ Diterima</div>
+    </div>
+    <div class="flow">
+      <div class="flow-item status-diproses">🔄 Diproses</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item status-ditolak">❌ Ditolak</div>
+    </div>
+  </div>
+
+  <!-- FILE LIST -->
+  <h2>4. File yang Akan Dibuat</h2>
+
+  <div class="section">
+    <table>
+      <thead><tr><th>File</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td colspan="2" style="background:#f0fdf4;font-weight:600;color:#065f46;">Composable</td></tr>
+        <tr><td><code>app/composables/usePmb.ts</code></td><td>Submit form baru + pindahan, upload berkas, fetch list & detail (admin)</td></tr>
+
+        <tr><td colspan="2" style="background:#eff6ff;font-weight:600;color:#1d4ed8;">Halaman Publik</td></tr>
+        <tr><td><code>app/pages/(public)/PMB/index.vue</code></td><td>Landing: pilih jalur BARU atau PINDAHAN</td></tr>
+        <tr><td><code>app/pages/(public)/PMB/baru.vue</code></td><td>Form pendaftaran jalur BARU</td></tr>
+        <tr><td><code>app/pages/(public)/PMB/pindahan.vue</code></td><td>Form pendaftaran jalur PINDAHAN</td></tr>
+        <tr><td><code>app/pages/(public)/PMB/sukses.vue</code></td><td>Halaman konfirmasi setelah submit berhasil</td></tr>
+
+        <tr><td colspan="2" style="background:#fdf4ff;font-weight:600;color:#6d28d9;">Admin</td></tr>
+        <tr><td><code>app/pages/admin/pmb/index.vue</code></td><td>List semua pendaftar + filter + search</td></tr>
+        <tr><td><code>app/pages/admin/pmb/[id].vue</code></td><td>Detail pendaftar + ubah status + catatan admin</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- URUTAN PENGERJAAN -->
+  <h2>5. Urutan Pengerjaan</h2>
+  <div class="section">
+    <ol style="padding-left:20px;line-height:2;">
+      <li>Buat 3 tabel di Supabase via Management API (<code>pmb_pendaftar</code>, <code>pmb_baru</code>, <code>pmb_pindahan</code>) + RLS</li>
+      <li>Buat composable <code>usePmb.ts</code></li>
+      <li>Buat halaman publik: landing (<code>/pmb</code>) → form baru → form pindahan → sukses</li>
+      <li>Buat admin list (<code>/admin/pmb</code>) + admin detail (<code>/admin/pmb/[id]</code>)</li>
+      <li>Tambahkan link PMB ke navbar dan sidebar admin</li>
+    </ol>
+  </div>
+
+</body>
+</html>
