@@ -1,15 +1,13 @@
 <script setup lang="ts">
-const partners = [
-  "Universitas Jayabaya",
-  "Yayasan Islamic Center Alhuda Timah",
-  "Sekolah Tinggi Ilmu Ekonomi Jaya Negara Tamansiswa Malang",
-  "RW 01 Kelurahan Karang Anyar Kecamatan Sawah Besar Kota Administrasi Jakarta Pusat",
-  "PKBM Taman Siswa Jakarta",
-  "RW 19 Kelurahan Mustika Jaya Kecamatan Mustika Jaya Kota Bekasi",
-  "PT. Duta Amanah Insani",
-  "PT. Caturaga Tiara Persada",
-  "LPK Kiraku Indonesia"
-];
+const supabase = useSupabasePublic()
+const { data: partners } = await useAsyncData('partner-public', async () => {
+  const { data, error } = await supabase
+    .from('partner')
+    .select('id, nama')
+    .order('urutan', { ascending: true })
+  if (error) throw error
+  return data ?? []
+})
 </script>
 
 <template>
@@ -20,8 +18,8 @@ const partners = [
       </div>
 
       <div class="grid">
-        <div v-for="(partner, index) in partners" :key="index" class="card">
-          {{ partner }}
+        <div v-for="partner in partners" :key="partner.id" class="card">
+          {{ partner.nama }}
         </div>
       </div>
     </div>
