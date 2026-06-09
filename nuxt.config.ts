@@ -12,4 +12,10 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   css: ["~/assets/css/tailwind.css"],
+  runtimeConfig: {
+    public: {
+      supabaseUrl: "",
+      supabaseAnonKey: "",
+    },
+  },
 });
