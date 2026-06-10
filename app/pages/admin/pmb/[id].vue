@@ -13,7 +13,7 @@ const error = ref('')
 const saving = ref(false)
 const savedMsg = ref('')
 
-const editStatus = ref<PmbStatus>('menunggu')
+const editStatus = ref<PmbStatus>('menunggu_verifikasi')
 const editCatatan = ref('')
 
 async function loadData() {
@@ -47,8 +47,7 @@ async function handleSaveStatus() {
 }
 
 const statusOptions = [
-  { label: 'Menunggu', value: 'menunggu' },
-  { label: 'Diproses', value: 'diproses' },
+  { label: 'Menunggu Verifikasi', value: 'menunggu_verifikasi' },
   { label: 'Diterima', value: 'diterima' },
   { label: 'Ditolak', value: 'ditolak' },
 ]
@@ -56,6 +55,12 @@ const statusOptions = [
 function formatDate(iso: string | null | undefined) {
   if (!iso) return '—'
   return new Date(iso).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })
+}
+
+const PRODI_LABEL: Record<string, string> = { manajemen: 'S1 Manajemen', akuntansi: 'S1 Akuntansi' }
+function formatProdi(value: string | null | undefined) {
+  if (!value) return '—'
+  return PRODI_LABEL[value] ?? value
 }
 
 const previewOpen = ref(false)
@@ -125,7 +130,7 @@ onMounted(loadData)
         </template>
         <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
           <div class="text-text-300">Nomor Pendaftaran</div>
-          <div class="font-mono text-xs text-text-100">{{ data.id }}</div>
+          <div class="font-mono font-bold text-text-100 text-lg tracking-widest">{{ data.nomor_pendaftaran }}</div>
           <div class="text-text-300">Tanggal Daftar</div>
           <div>{{ formatDate(data.created_at) }}</div>
         </div>
@@ -134,18 +139,17 @@ onMounted(loadData)
       <!-- ── DATA BARU ── -->
       <template v-if="data.tipe === 'baru' && data.pmb_baru">
         <UCard>
-          <template #header><h2 class="font-semibold text-text-100">Data Calon Mahasiswi</h2></template>
+          <template #header><h2 class="font-semibold text-text-100">Data Calon Mahasiswa/i</h2></template>
           <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
             <div class="text-text-300">Nama</div><div class="font-medium">{{ data.pmb_baru.nama }}</div>
             <div class="text-text-300">Jenis Kelamin</div><div>{{ data.pmb_baru.jenis_kelamin }}</div>
             <div class="text-text-300">Agama</div><div>{{ data.pmb_baru.agama }}</div>
-            <div class="text-text-300">Program Studi</div><div class="capitalize">{{ data.pmb_baru.program_studi }}</div>
+            <div class="text-text-300">Program Studi</div><div>{{ formatProdi(data.pmb_baru.program_studi) }}</div>
             <div class="text-text-300">NISN</div><div class="font-mono">{{ data.pmb_baru.nisn }}</div>
             <div class="text-text-300">NIK</div><div class="font-mono">{{ data.pmb_baru.nik }}</div>
             <div class="text-text-300">Tempat / Tgl Lahir</div><div>{{ data.pmb_baru.tempat_lahir }}, {{ formatDate(data.pmb_baru.tanggal_lahir) }}</div>
             <div class="text-text-300">Alamat Domisili</div><div>{{ data.pmb_baru.alamat_domisili }}</div>
             <div class="text-text-300">Status Pernikahan</div><div class="capitalize">{{ data.pmb_baru.status_pernikahan }}{{ data.pmb_baru.status_pernikahan_lainnya ? ` (${data.pmb_baru.status_pernikahan_lainnya})` : '' }}</div>
-            <div class="text-text-300">Nama Referensi</div><div>{{ data.pmb_baru.nama_referensi }}</div>
             <div class="text-text-300">Pekerjaan</div><div>{{ data.pmb_baru.pekerjaan }}</div>
             <div class="text-text-300">Nomor HP</div><div>{{ data.pmb_baru.no_hp }}</div>
           </div>
@@ -165,9 +169,13 @@ onMounted(loadData)
           <template #header><h2 class="font-semibold text-text-100">Data Orang Tua / Wali</h2></template>
           <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
             <div class="text-text-300">Nama Ibu Kandung</div><div>{{ data.pmb_baru.nama_ibu_kandung }}</div>
+            <div class="text-text-300">Nama Ayah Kandung</div><div>{{ data.pmb_baru.nama_ayah_kandung }}</div>
             <div class="text-text-300">Nama Wali</div><div>{{ data.pmb_baru.nama_wali }}</div>
+            <div class="text-text-300">HP Orang Tua</div><div>{{ data.pmb_baru.no_hp_ortu }}</div>
             <div class="text-text-300">HP Wali</div><div>{{ data.pmb_baru.no_hp_wali }}</div>
+            <div class="text-text-300">Pekerjaan Ibu</div><div>{{ data.pmb_baru.pekerjaan_ibu }}</div>
             <div class="text-text-300">Pekerjaan Ayah</div><div>{{ data.pmb_baru.pekerjaan_ayah }}</div>
+            <div class="text-text-300">Pekerjaan Wali</div><div>{{ data.pmb_baru.pekerjaan_wali }}</div>
             <div class="text-text-300">Penghasilan Rata-Rata</div><div>{{ data.pmb_baru.penghasilan_rata_rata }}</div>
           </div>
         </UCard>
@@ -194,16 +202,18 @@ onMounted(loadData)
       <!-- ── DATA PINDAHAN ── -->
       <template v-else-if="data.tipe === 'pindahan' && data.pmb_pindahan">
         <UCard>
-          <template #header><h2 class="font-semibold text-text-100">Data Mahasiswi Pindahan</h2></template>
+          <template #header><h2 class="font-semibold text-text-100">Data Mahasiswa/i Pindahan</h2></template>
           <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
             <div class="text-text-300">Nama</div><div class="font-medium">{{ data.pmb_pindahan.nama }}</div>
+            <div class="text-text-300">Program Studi yang Dituju</div><div>{{ formatProdi(data.pmb_pindahan.program_studi) }}</div>
             <div class="text-text-300">Jenis Kelamin</div><div>{{ data.pmb_pindahan.jenis_kelamin }}</div>
             <div class="text-text-300">Agama</div><div>{{ data.pmb_pindahan.agama }}</div>
             <div class="text-text-300">NIK</div><div class="font-mono">{{ data.pmb_pindahan.nik }}</div>
+            <div class="text-text-300">NISN</div><div class="font-mono">{{ data.pmb_pindahan.nisn }}</div>
             <div class="text-text-300">NIM / NPM Lama</div><div class="font-mono">{{ data.pmb_pindahan.nim_lama }}</div>
             <div class="text-text-300">Tempat / Tgl Lahir</div><div>{{ data.pmb_pindahan.tempat_lahir }}, {{ formatDate(data.pmb_pindahan.tanggal_lahir) }}</div>
+            <div class="text-text-300">Alamat Domisili</div><div>{{ data.pmb_pindahan.alamat_domisili }}</div>
             <div class="text-text-300">Status Pernikahan</div><div class="capitalize">{{ data.pmb_pindahan.status_pernikahan }}{{ data.pmb_pindahan.status_pernikahan_lainnya ? ` (${data.pmb_pindahan.status_pernikahan_lainnya})` : '' }}</div>
-            <div class="text-text-300">Nama Referensi</div><div>{{ data.pmb_pindahan.nama_referensi }}</div>
             <div class="text-text-300">Pekerjaan</div><div>{{ data.pmb_pindahan.pekerjaan }}</div>
             <div class="text-text-300">Nomor HP</div><div>{{ data.pmb_pindahan.no_hp }}</div>
           </div>
@@ -219,10 +229,10 @@ onMounted(loadData)
         </UCard>
 
         <UCard>
-          <template #header><h2 class="font-semibold text-text-100">Berkas (Opsional)</h2></template>
+          <template #header><h2 class="font-semibold text-text-100">Berkas</h2></template>
           <div class="grid grid-cols-2 gap-3">
             <div v-for="(item) in [
-              { label: 'Surat Tugas', url: data.pmb_pindahan.berkas_surat_tugas_url },
+              { label: 'Surat Mutasi', url: data.pmb_pindahan.berkas_surat_mutasi_url },
               { label: 'Transkrip Nilai', url: data.pmb_pindahan.berkas_transkrip_url },
               { label: 'Biodata PP/KTI', url: data.pmb_pindahan.berkas_biodata_pp_kti_url },
               { label: 'KTA / KTM Lama', url: data.pmb_pindahan.berkas_kta_url },

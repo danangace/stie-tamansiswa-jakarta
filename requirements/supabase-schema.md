@@ -103,13 +103,35 @@ CREATE TABLE program_studi (
 
 -- ── PMB: PENDAFTAR (parent) ───────────────────────────────────
 CREATE TABLE pmb_pendaftar (
-  id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  tipe          text NOT NULL,           -- 'baru' | 'pindahan'
-  status        text NOT NULL DEFAULT 'menunggu', -- 'menunggu' | 'diproses' | 'diterima' | 'ditolak'
-  catatan_admin text,
-  created_at    timestamptz NOT NULL DEFAULT now(),
-  updated_at    timestamptz NOT NULL DEFAULT now()
+  id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  nomor_pendaftaran   varchar(6),        -- diisi otomatis oleh trigger, format YYnnnn mis. 260001
+  tipe                text NOT NULL,     -- 'baru' | 'pindahan'
+  status              text NOT NULL DEFAULT 'menunggu', -- 'menunggu' | 'diproses' | 'diterima' | 'ditolak'
+  catatan_admin       text,
+  created_at          timestamptz NOT NULL DEFAULT now(),
+  updated_at          timestamptz NOT NULL DEFAULT now()
 );
+
+-- Trigger untuk auto-generate nomor_pendaftaran (format YYnnnn, mis. 260001)
+CREATE OR REPLACE FUNCTION set_nomor_pendaftaran()
+RETURNS TRIGGER AS $$
+DECLARE
+  year_prefix text;
+  next_seq    int;
+BEGIN
+  year_prefix := to_char(NOW(), 'YY');
+  SELECT COALESCE(MAX(RIGHT(nomor_pendaftaran, 4)::int), 0) + 1
+    INTO next_seq
+    FROM pmb_pendaftar
+   WHERE nomor_pendaftaran LIKE year_prefix || '%';
+  NEW.nomor_pendaftaran := year_prefix || LPAD(next_seq::text, 4, '0');
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_set_nomor_pendaftaran
+BEFORE INSERT ON pmb_pendaftar
+FOR EACH ROW EXECUTE FUNCTION set_nomor_pendaftaran();
 
 -- ── PMB: MAHASISWA BARU ───────────────────────────────────────
 CREATE TABLE pmb_baru (
@@ -127,7 +149,6 @@ CREATE TABLE pmb_baru (
   alamat_domisili           text NOT NULL,
   status_pernikahan         text NOT NULL,
   status_pernikahan_lainnya text,
-  nama_referensi            text NOT NULL,
   pekerjaan                 text NOT NULL,
   no_hp                     text NOT NULL,
   -- Data Akademik
@@ -137,9 +158,13 @@ CREATE TABLE pmb_baru (
   tahun_lulus_sma           integer NOT NULL,
   -- Data Orang Tua / Wali
   nama_ibu_kandung          text NOT NULL,
+  nama_ayah_kandung         text NOT NULL,
   nama_wali                 text NOT NULL,
+  no_hp_ortu                text NOT NULL,
   no_hp_wali                text NOT NULL,
+  pekerjaan_ibu             text NOT NULL,
   pekerjaan_ayah            text NOT NULL,
+  pekerjaan_wali            text NOT NULL,
   penghasilan_rata_rata     text NOT NULL,
   -- Upload Berkas
   berkas_ijazah_url         text,          -- opsional (belum lulus)
@@ -156,26 +181,27 @@ CREATE TABLE pmb_pindahan (
   nama                      text NOT NULL,
   jenis_kelamin             text NOT NULL,
   nik                       text NOT NULL,
+  nisn                      text NOT NULL,
   nim_lama                  text NOT NULL,
   tempat_lahir              text NOT NULL,
   tanggal_lahir             date NOT NULL,
   agama                     text NOT NULL,
+  alamat_domisili           text NOT NULL,
   status_pernikahan         text NOT NULL,
   status_pernikahan_lainnya text,
   pekerjaan                 text NOT NULL,
-  nama_referensi            text NOT NULL,
   no_hp                     text NOT NULL,
   -- Data Akademik Kampus Sebelumnya
   nama_kampus_lama          text NOT NULL,
   program_studi_lama        text NOT NULL,
   tahun_masuk_lama          integer NOT NULL,
-  -- Upload Berkas (semua opsional)
-  berkas_surat_tugas_url    text,
-  berkas_transkrip_url      text,
-  berkas_biodata_pp_kti_url text,
-  berkas_kta_url            text,
-  berkas_kk_url             text,
-  berkas_akte_url           text
+  -- Upload Berkas (semua wajib)
+  berkas_surat_mutasi_url   text NOT NULL,
+  berkas_transkrip_url      text NOT NULL,
+  berkas_biodata_pp_kti_url text NOT NULL,
+  berkas_kta_url            text NOT NULL,
+  berkas_kk_url             text NOT NULL,
+  berkas_akte_url           text NOT NULL
 );
 ```
 
@@ -418,14 +444,15 @@ media/
 
 ### `pmb_pendaftar` (parent)
 
-| Kolom         | Tipe        | Null | Default      | Keterangan                                          |
-|---------------|-------------|------|--------------|-----------------------------------------------------|
-| id            | uuid        | NO   | gen_random_uuid() | PK                                            |
-| tipe          | text        | NO   |              | `'baru'` atau `'pindahan'`                          |
-| status        | text        | NO   | `'menunggu'` | `'menunggu'` / `'diproses'` / `'diterima'` / `'ditolak'` |
-| catatan_admin | text        | YES  |              | Catatan internal admin, tidak ditampilkan ke user   |
-| created_at    | timestamptz | NO   | now()        |                                                     |
-| updated_at    | timestamptz | NO   | now()        |                                                     |
+| Kolom                | Tipe        | Null | Default           | Keterangan                                                    |
+|----------------------|-------------|------|-------------------|---------------------------------------------------------------|
+| id                   | uuid        | NO   | gen_random_uuid() | PK                                                            |
+| nomor_pendaftaran    | varchar(6)  | YES  | trigger           | Auto-generate format `YYnnnn` mis. `260001`. Trigger `trg_set_nomor_pendaftaran` |
+| tipe                 | text        | NO   |                   | `'baru'` atau `'pindahan'`                                    |
+| status               | text        | NO   | `'menunggu'`      | `'menunggu'` / `'diproses'` / `'diterima'` / `'ditolak'`     |
+| catatan_admin        | text        | YES  |                   | Catatan internal admin, tidak ditampilkan ke user             |
+| created_at           | timestamptz | NO   | now()             |                                                               |
+| updated_at           | timestamptz | NO   | now()             |                                                               |
 
 **RLS:** public INSERT, authenticated ALL
 
@@ -448,7 +475,6 @@ media/
 | alamat_domisili           | text    | NO   |                                        |
 | status_pernikahan         | text    | NO   | `'lajang'` / `'menikah'` / `'lainnya'` |
 | status_pernikahan_lainnya | text    | YES  | Diisi jika status = `'lainnya'`        |
-| nama_referensi            | text    | NO   | Nama yang mereferensikan               |
 | pekerjaan                 | text    | NO   |                                        |
 | no_hp                     | text    | NO   |                                        |
 | nama_sma                  | text    | NO   |                                        |
@@ -456,9 +482,13 @@ media/
 | tahun_masuk_sma           | integer | NO   |                                        |
 | tahun_lulus_sma           | integer | NO   |                                        |
 | nama_ibu_kandung          | text    | NO   |                                        |
+| nama_ayah_kandung         | text    | NO   |                                        |
 | nama_wali                 | text    | NO   |                                        |
-| no_hp_wali                | text    | NO   |                                        |
+| no_hp_ortu                | text    | NO   | Nomor HP orang tua                     |
+| no_hp_wali                | text    | NO   | Nomor HP wali                          |
+| pekerjaan_ibu             | text    | NO   |                                        |
 | pekerjaan_ayah            | text    | NO   |                                        |
+| pekerjaan_wali            | text    | NO   |                                        |
 | penghasilan_rata_rata     | text    | NO   | Teks bebas, mis. "Rp 3.000.000"        |
 | berkas_ijazah_url         | text    | YES  | Opsional — untuk yang belum lulus      |
 | berkas_ktp_url            | text    | NO   |                                        |
@@ -478,24 +508,25 @@ media/
 | nama                      | text    | NO   |                                        |
 | jenis_kelamin             | text    | NO   |                                        |
 | nik                       | text    | NO   |                                        |
+| nisn                      | text    | NO   | Nomor Induk Siswa Nasional             |
 | nim_lama                  | text    | NO   | NIM/NPM dari kampus sebelumnya         |
 | tempat_lahir              | text    | NO   |                                        |
 | tanggal_lahir             | date    | NO   |                                        |
 | agama                     | text    | NO   |                                        |
+| alamat_domisili           | text    | NO   |                                        |
 | status_pernikahan         | text    | NO   |                                        |
 | status_pernikahan_lainnya | text    | YES  |                                        |
 | pekerjaan                 | text    | NO   |                                        |
-| nama_referensi            | text    | NO   |                                        |
 | no_hp                     | text    | NO   |                                        |
 | nama_kampus_lama          | text    | NO   |                                        |
 | program_studi_lama        | text    | NO   |                                        |
 | tahun_masuk_lama          | integer | NO   |                                        |
-| berkas_surat_tugas_url    | text    | YES  | Opsional                               |
-| berkas_transkrip_url      | text    | YES  | Opsional                               |
-| berkas_biodata_pp_kti_url | text    | YES  | Opsional — printout biodata PP/KTI     |
-| berkas_kta_url            | text    | YES  | Opsional — KTA/KTM kampus lama         |
-| berkas_kk_url             | text    | YES  | Opsional                               |
-| berkas_akte_url           | text    | YES  | Opsional                               |
+| berkas_surat_mutasi_url   | text    | NO   | Surat mutasi dari kampus sebelumnya    |
+| berkas_transkrip_url      | text    | NO   | Transkrip nilai kampus sebelumnya      |
+| berkas_biodata_pp_kti_url | text    | NO   | Printout biodata PP/KTI                |
+| berkas_kta_url            | text    | NO   | KTA/KTM kampus lama                    |
+| berkas_kk_url             | text    | NO   |                                        |
+| berkas_akte_url           | text    | NO   |                                        |
 
 **RLS:** public INSERT, authenticated ALL
 

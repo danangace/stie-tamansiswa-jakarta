@@ -1,8 +1,9 @@
 export type PmbTipe = 'baru' | 'pindahan'
-export type PmbStatus = 'menunggu' | 'diproses' | 'diterima' | 'ditolak'
+export type PmbStatus = 'menunggu_verifikasi' | 'diterima' | 'ditolak'
 
 export interface PmbPendaftar {
   id: string
+  nomor_pendaftaran: string
   tipe: PmbTipe
   status: PmbStatus
   catatan_admin: string | null
@@ -25,7 +26,6 @@ export interface PmbBaru {
   alamat_domisili: string
   status_pernikahan: string
   status_pernikahan_lainnya: string | null
-  nama_referensi: string
   pekerjaan: string
   no_hp: string
   // Data Akademik
@@ -35,9 +35,13 @@ export interface PmbBaru {
   tahun_lulus_sma: number
   // Data Orang Tua / Wali
   nama_ibu_kandung: string
+  nama_ayah_kandung: string
   nama_wali: string
+  no_hp_ortu: string
   no_hp_wali: string
+  pekerjaan_ibu: string
   pekerjaan_ayah: string
+  pekerjaan_wali: string
   penghasilan_rata_rata: string
   // Upload Berkas
   berkas_ijazah_url: string | null
@@ -50,29 +54,31 @@ export interface PmbPindahan {
   id: string
   pendaftar_id: string
   // Data Mahasiswi
+  program_studi: string
   nama: string
   jenis_kelamin: string
   nik: string
+  nisn: string
   nim_lama: string
   tempat_lahir: string
   tanggal_lahir: string
   agama: string
+  alamat_domisili: string
   status_pernikahan: string
   status_pernikahan_lainnya: string | null
   pekerjaan: string
-  nama_referensi: string
   no_hp: string
   // Data Akademik
   nama_kampus_lama: string
   program_studi_lama: string
   tahun_masuk_lama: number
-  // Upload Berkas (semua opsional)
-  berkas_surat_tugas_url: string | null
-  berkas_transkrip_url: string | null
-  berkas_biodata_pp_kti_url: string | null
-  berkas_kta_url: string | null
-  berkas_kk_url: string | null
-  berkas_akte_url: string | null
+  // Upload Berkas (semua wajib)
+  berkas_surat_mutasi_url: string
+  berkas_transkrip_url: string
+  berkas_biodata_pp_kti_url: string
+  berkas_kta_url: string
+  berkas_kk_url: string
+  berkas_akte_url: string
 }
 
 export type PmbBaru_Form = Omit<PmbBaru, 'id' | 'pendaftar_id'>
@@ -84,15 +90,13 @@ export interface PmbPendaftarDetail extends PmbPendaftar {
 }
 
 export const PMB_STATUS_LABEL: Record<PmbStatus, string> = {
-  menunggu: 'Menunggu',
-  diproses: 'Diproses',
+  menunggu_verifikasi: 'Menunggu Verifikasi',
   diterima: 'Diterima',
   ditolak: 'Ditolak',
 }
 
 export const PMB_STATUS_COLOR: Record<PmbStatus, string> = {
-  menunggu: 'neutral',
-  diproses: 'info',
+  menunggu_verifikasi: 'neutral',
   diterima: 'success',
   ditolak: 'error',
 }
@@ -102,9 +106,8 @@ export function usePmb() {
 
   // ─── Upload berkas ──────────────────────────────────────────────
   async function uploadBerkas(file: File, folder: string, pendaftarId: string, name: string): Promise<string> {
-    const ext = file.name.split('.').pop()
-    const path = `pmb/${folder}/${pendaftarId}/${name}.${ext}`
-    const { error } = await supabase.storage.from('media').upload(path, file, { upsert: true })
+    const path = `pmb/${folder}/${pendaftarId}/${name}.pdf`
+    const { error } = await supabase.storage.from('media').upload(path, file, { upsert: true, contentType: 'application/pdf' })
     if (error) throw error
     const { data } = supabase.storage.from('media').getPublicUrl(path)
     return data.publicUrl
@@ -119,18 +122,16 @@ export function usePmb() {
       kk: File
       akte: File
     },
-  ): Promise<string> {
-    // 1. Insert pendaftar
+  ): Promise<{ id: string; nomor: string }> {
     const { data: pendaftar, error: e1 } = await supabase
       .from('pmb_pendaftar')
       .insert({ tipe: 'baru' })
-      .select('id')
+      .select('id, nomor_pendaftaran')
       .single()
     if (e1) throw e1
 
     const pid = pendaftar.id
 
-    // 2. Upload berkas
     const [ktp_url, kk_url, akte_url] = await Promise.all([
       uploadBerkas(berkas.ktp, 'baru', pid, 'ktp'),
       uploadBerkas(berkas.kk, 'baru', pid, 'kk'),
@@ -138,7 +139,6 @@ export function usePmb() {
     ])
     const ijazah_url = berkas.ijazah ? await uploadBerkas(berkas.ijazah, 'baru', pid, 'ijazah') : null
 
-    // 3. Insert data baru
     const { error: e2 } = await supabase.from('pmb_baru').insert({
       ...form,
       pendaftar_id: pid,
@@ -149,47 +149,44 @@ export function usePmb() {
     })
     if (e2) throw e2
 
-    return pid
+    return { id: pid, nomor: pendaftar.nomor_pendaftaran }
   }
 
   // ─── Submit PINDAHAN ────────────────────────────────────────────
   async function submitPindahan(
     form: PmbPindahan_Form,
     berkas: {
-      surat_tugas?: File | null
-      transkrip?: File | null
-      biodata_pp_kti?: File | null
-      kta?: File | null
-      kk?: File | null
-      akte?: File | null
+      surat_mutasi: File
+      transkrip: File
+      biodata_pp_kti: File
+      kta: File
+      kk: File
+      akte: File
     },
-  ): Promise<string> {
+  ): Promise<{ id: string; nomor: string }> {
     const { data: pendaftar, error: e1 } = await supabase
       .from('pmb_pendaftar')
       .insert({ tipe: 'pindahan' })
-      .select('id')
+      .select('id, nomor_pendaftaran')
       .single()
     if (e1) throw e1
 
     const pid = pendaftar.id
 
-    const uploadIfExists = async (file: File | null | undefined, name: string) =>
-      file ? uploadBerkas(file, 'pindahan', pid, name) : null
-
-    const [surat_tugas_url, transkrip_url, biodata_url, kta_url, kk_url, akte_url] =
+    const [surat_mutasi_url, transkrip_url, biodata_url, kta_url, kk_url, akte_url] =
       await Promise.all([
-        uploadIfExists(berkas.surat_tugas, 'surat-tugas'),
-        uploadIfExists(berkas.transkrip, 'transkrip'),
-        uploadIfExists(berkas.biodata_pp_kti, 'biodata-pp-kti'),
-        uploadIfExists(berkas.kta, 'kta'),
-        uploadIfExists(berkas.kk, 'kk'),
-        uploadIfExists(berkas.akte, 'akte'),
+        uploadBerkas(berkas.surat_mutasi, 'pindahan', pid, 'surat-mutasi'),
+        uploadBerkas(berkas.transkrip, 'pindahan', pid, 'transkrip'),
+        uploadBerkas(berkas.biodata_pp_kti, 'pindahan', pid, 'biodata-pp-kti'),
+        uploadBerkas(berkas.kta, 'pindahan', pid, 'kta'),
+        uploadBerkas(berkas.kk, 'pindahan', pid, 'kk'),
+        uploadBerkas(berkas.akte, 'pindahan', pid, 'akte'),
       ])
 
     const { error: e2 } = await supabase.from('pmb_pindahan').insert({
       ...form,
       pendaftar_id: pid,
-      berkas_surat_tugas_url: surat_tugas_url,
+      berkas_surat_mutasi_url: surat_mutasi_url,
       berkas_transkrip_url: transkrip_url,
       berkas_biodata_pp_kti_url: biodata_url,
       berkas_kta_url: kta_url,
@@ -198,7 +195,7 @@ export function usePmb() {
     })
     if (e2) throw e2
 
-    return pid
+    return { id: pid, nomor: pendaftar.nomor_pendaftaran }
   }
 
   // ─── Admin: list ────────────────────────────────────────────────
@@ -222,7 +219,13 @@ export function usePmb() {
       .eq('id', id)
       .single()
     if (error) throw error
-    return data as PmbPendaftarDetail
+    // Supabase returns one-to-many as arrays; normalize to single object
+    const raw = data as any
+    return {
+      ...raw,
+      pmb_baru: Array.isArray(raw.pmb_baru) ? (raw.pmb_baru[0] ?? null) : raw.pmb_baru,
+      pmb_pindahan: Array.isArray(raw.pmb_pindahan) ? (raw.pmb_pindahan[0] ?? null) : raw.pmb_pindahan,
+    } as PmbPendaftarDetail
   }
 
   // ─── Admin: update status ───────────────────────────────────────
@@ -233,5 +236,19 @@ export function usePmb() {
     if (error) throw error
   }
 
-  return { submitBaru, submitPindahan, getAll, getDetail, updateStatus }
+  // ─── Admin: export Excel ────────────────────────────────────────
+  async function getAllForExport() {
+    const { data, error } = await supabase
+      .from('pmb_pendaftar')
+      .select('*, pmb_baru(*), pmb_pindahan(*)')
+      .order('nomor_pendaftaran', { ascending: true })
+    if (error) throw error
+    return (data as any[]).map(row => ({
+      ...row,
+      pmb_baru: Array.isArray(row.pmb_baru) ? (row.pmb_baru[0] ?? null) : row.pmb_baru,
+      pmb_pindahan: Array.isArray(row.pmb_pindahan) ? (row.pmb_pindahan[0] ?? null) : row.pmb_pindahan,
+    })) as PmbPendaftarDetail[]
+  }
+
+  return { submitBaru, submitPindahan, getAll, getDetail, updateStatus, getAllForExport }
 }

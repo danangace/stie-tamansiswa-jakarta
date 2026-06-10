@@ -57,7 +57,7 @@ const items = computed<NavigationMenuItem[]>(() => {
 
 
     {
-      label: "Daftar Sekarang",
+      label: "PMB",
       to: "/pmb",
       active: route.path.startsWith("/pmb"),
       class: "text-base font-bold text-white bg-primary-600 px-4 py-2 rounded-lg hover:bg-primary-700 transition"
