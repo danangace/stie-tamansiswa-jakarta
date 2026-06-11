@@ -23,7 +23,7 @@ const deleting = ref(false)
 const reordering = ref(false)
 
 const columns: TableColumn<Partner>[] = [
-  { id: 'urutan', header: '#' },
+  { id: 'urutan', header: 'No' },
   { accessorKey: 'nama', header: 'Nama Partner' },
   { id: 'actions', header: '' },
 ]

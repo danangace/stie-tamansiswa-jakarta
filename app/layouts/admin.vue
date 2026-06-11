@@ -19,7 +19,7 @@ function isActive(to: string) {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-neutral-200 dark:bg-neutral-300">
+  <div class="h-screen flex flex-col bg-neutral-200 dark:bg-neutral-300">
     <!-- Header -->
     <header class="bg-secondary-500 text-white px-6 py-4 flex items-center justify-between shadow z-10">
       <div class="flex items-center gap-3">
@@ -61,5 +61,10 @@ function isActive(to: string) {
         <slot />
       </main>
     </div>
+
+    <!-- Footer -->
+    <footer class="px-6 py-3 text-center text-xs text-text-300 bg-white dark:bg-neutral-200 border-t border-neutral-500 shrink-0">
+      © 2026 STIE Tamansiswa Jakarta. All rights reserved.
+    </footer>
   </div>
 </template>

@@ -38,7 +38,7 @@ function openPreview(src: string | null) {
 }
 
 const columns: TableColumn<TenagaAhli>[] = [
-  { id: 'urutan', header: '#' },
+  { id: 'urutan', header: 'No' },
   { id: 'foto_url', header: 'Foto' },
   { accessorKey: 'nama', header: 'Nama' },
   { accessorKey: 'jabatan', header: 'Jabatan' },

@@ -35,7 +35,7 @@ function openPreview(src: string | null) {
 }
 
 const columns: TableColumn<KegiatanMahasiswa>[] = [
-  { id: 'urutan', header: '#' },
+  { id: 'urutan', header: 'No' },
   { id: 'foto_url', header: 'Foto' },
   { accessorKey: 'judul', header: 'Judul' },
   { id: 'deskripsi', header: 'Deskripsi' },
