@@ -106,7 +106,7 @@ CREATE TABLE pmb_pendaftar (
   id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   nomor_pendaftaran   varchar(6),        -- diisi otomatis oleh trigger, format YYnnnn mis. 260001
   tipe                text NOT NULL,     -- 'baru' | 'pindahan'
-  status              text NOT NULL DEFAULT 'menunggu', -- 'menunggu' | 'diproses' | 'diterima' | 'ditolak'
+  status              text NOT NULL DEFAULT 'menunggu_verifikasi', -- 'menunggu_verifikasi' | 'diterima' | 'ditolak'
   catatan_admin       text,
   created_at          timestamptz NOT NULL DEFAULT now(),
   updated_at          timestamptz NOT NULL DEFAULT now()
@@ -158,13 +158,9 @@ CREATE TABLE pmb_baru (
   tahun_lulus_sma           integer NOT NULL,
   -- Data Orang Tua / Wali
   nama_ibu_kandung          text NOT NULL,
-  nama_ayah_kandung         text NOT NULL,
   nama_wali                 text NOT NULL,
-  no_hp_ortu                text NOT NULL,
   no_hp_wali                text NOT NULL,
-  pekerjaan_ibu             text NOT NULL,
   pekerjaan_ayah            text NOT NULL,
-  pekerjaan_wali            text NOT NULL,
   penghasilan_rata_rata     text NOT NULL,
   -- Upload Berkas
   berkas_ijazah_url         text,          -- opsional (belum lulus)
@@ -172,6 +168,12 @@ CREATE TABLE pmb_baru (
   berkas_kk_url             text NOT NULL,
   berkas_akte_url           text NOT NULL
 );
+
+-- Kolom tambahan pmb_baru (ditambah via ALTER TABLE setelah initial create)
+ALTER TABLE pmb_baru ADD COLUMN IF NOT EXISTS nama_ayah_kandung text NOT NULL DEFAULT '';
+ALTER TABLE pmb_baru ADD COLUMN IF NOT EXISTS no_hp_ortu        text NOT NULL DEFAULT '';
+ALTER TABLE pmb_baru ADD COLUMN IF NOT EXISTS pekerjaan_ibu     text NOT NULL DEFAULT '';
+ALTER TABLE pmb_baru ADD COLUMN IF NOT EXISTS pekerjaan_wali    text NOT NULL DEFAULT '';
 
 -- ── PMB: MAHASISWA PINDAHAN ───────────────────────────────────
 CREATE TABLE pmb_pindahan (
@@ -181,12 +183,10 @@ CREATE TABLE pmb_pindahan (
   nama                      text NOT NULL,
   jenis_kelamin             text NOT NULL,
   nik                       text NOT NULL,
-  nisn                      text NOT NULL,
   nim_lama                  text NOT NULL,
   tempat_lahir              text NOT NULL,
   tanggal_lahir             date NOT NULL,
   agama                     text NOT NULL,
-  alamat_domisili           text NOT NULL,
   status_pernikahan         text NOT NULL,
   status_pernikahan_lainnya text,
   pekerjaan                 text NOT NULL,
@@ -203,6 +203,11 @@ CREATE TABLE pmb_pindahan (
   berkas_kk_url             text NOT NULL,
   berkas_akte_url           text NOT NULL
 );
+
+-- Kolom tambahan pmb_pindahan (ditambah via ALTER TABLE setelah initial create)
+ALTER TABLE pmb_pindahan ADD COLUMN IF NOT EXISTS nisn           text NOT NULL DEFAULT '';
+ALTER TABLE pmb_pindahan ADD COLUMN IF NOT EXISTS alamat_domisili text NOT NULL DEFAULT '';
+ALTER TABLE pmb_pindahan ADD COLUMN IF NOT EXISTS program_studi  text NOT NULL DEFAULT '';
 ```
 
 #### 3b. Aktifkan Row Level Security (RLS)
@@ -449,7 +454,7 @@ media/
 | id                   | uuid        | NO   | gen_random_uuid() | PK                                                            |
 | nomor_pendaftaran    | varchar(6)  | YES  | trigger           | Auto-generate format `YYnnnn` mis. `260001`. Trigger `trg_set_nomor_pendaftaran` |
 | tipe                 | text        | NO   |                   | `'baru'` atau `'pindahan'`                                    |
-| status               | text        | NO   | `'menunggu'`      | `'menunggu'` / `'diproses'` / `'diterima'` / `'ditolak'`     |
+| status               | text        | NO   | `'menunggu_verifikasi'` | `'menunggu_verifikasi'` / `'diterima'` / `'ditolak'`    |
 | catatan_admin        | text        | YES  |                   | Catatan internal admin, tidak ditampilkan ke user             |
 | created_at           | timestamptz | NO   | now()             |                                                               |
 | updated_at           | timestamptz | NO   | now()             |                                                               |
@@ -482,13 +487,13 @@ media/
 | tahun_masuk_sma           | integer | NO   |                                        |
 | tahun_lulus_sma           | integer | NO   |                                        |
 | nama_ibu_kandung          | text    | NO   |                                        |
-| nama_ayah_kandung         | text    | NO   |                                        |
 | nama_wali                 | text    | NO   |                                        |
-| no_hp_ortu                | text    | NO   | Nomor HP orang tua                     |
 | no_hp_wali                | text    | NO   | Nomor HP wali                          |
-| pekerjaan_ibu             | text    | NO   |                                        |
 | pekerjaan_ayah            | text    | NO   |                                        |
-| pekerjaan_wali            | text    | NO   |                                        |
+| nama_ayah_kandung         | text    | NO   | Default `''` — ditambah via ALTER TABLE |
+| no_hp_ortu                | text    | NO   | Nomor HP orang tua. Default `''` — ditambah via ALTER TABLE |
+| pekerjaan_ibu             | text    | NO   | Default `''` — ditambah via ALTER TABLE |
+| pekerjaan_wali            | text    | NO   | Default `''` — ditambah via ALTER TABLE |
 | penghasilan_rata_rata     | text    | NO   | Teks bebas, mis. "Rp 3.000.000"        |
 | berkas_ijazah_url         | text    | YES  | Opsional — untuk yang belum lulus      |
 | berkas_ktp_url            | text    | NO   |                                        |
@@ -508,13 +513,14 @@ media/
 | nama                      | text    | NO   |                                        |
 | jenis_kelamin             | text    | NO   |                                        |
 | nik                       | text    | NO   |                                        |
-| nisn                      | text    | NO   | Nomor Induk Siswa Nasional             |
 | nim_lama                  | text    | NO   | NIM/NPM dari kampus sebelumnya         |
 | tempat_lahir              | text    | NO   |                                        |
 | tanggal_lahir             | date    | NO   |                                        |
 | agama                     | text    | NO   |                                        |
-| alamat_domisili           | text    | NO   |                                        |
 | status_pernikahan         | text    | NO   |                                        |
+| nisn                      | text    | NO   | Nomor Induk Siswa Nasional. Default `''` — ditambah via ALTER TABLE |
+| alamat_domisili           | text    | NO   | Default `''` — ditambah via ALTER TABLE |
+| program_studi             | text    | NO   | `'manajemen'` / `'akuntansi'`. Default `''` — ditambah via ALTER TABLE |
 | status_pernikahan_lainnya | text    | YES  |                                        |
 | pekerjaan                 | text    | NO   |                                        |
 | no_hp                     | text    | NO   |                                        |

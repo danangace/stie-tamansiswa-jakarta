@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PmbBaru_Form } from '~/composables/usePmb'
 
-definePageMeta({ path: '/pmb/baru', title: 'Pendaftaran Mahasiswa Baru' })
+definePageMeta({ path: '/pmb/baru', title: 'Pendaftaran Mahasiswa Baru', ssr: false })
 
 const { submitBaru } = usePmb()
 const router = useRouter()

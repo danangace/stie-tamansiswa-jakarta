@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PmbPindahan_Form } from '~/composables/usePmb'
 
-definePageMeta({ path: '/pmb/pindahan', title: 'Pendaftaran Pindahan / Mutasi' })
+definePageMeta({ path: '/pmb/pindahan', title: 'Pendaftaran Pindahan / Mutasi', ssr: false })
 
 const { submitPindahan } = usePmb()
 const router = useRouter()

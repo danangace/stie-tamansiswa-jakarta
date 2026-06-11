@@ -237,11 +237,13 @@ export function usePmb() {
   }
 
   // ─── Admin: export Excel ────────────────────────────────────────
-  async function getAllForExport() {
-    const { data, error } = await supabase
+  async function getAllForExport(tahun?: string) {
+    let query = supabase
       .from('pmb_pendaftar')
       .select('*, pmb_baru(*), pmb_pindahan(*)')
       .order('nomor_pendaftaran', { ascending: true })
+    if (tahun) query = query.like('nomor_pendaftaran', `${tahun}%`)
+    const { data, error } = await query
     if (error) throw error
     return (data as any[]).map(row => ({
       ...row,
