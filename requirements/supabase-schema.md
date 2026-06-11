@@ -41,6 +41,14 @@ Buka **SQL Editor** di Supabase dashboard (atau gunakan Management API), lalu ja
 #### 3a. Buat semua tabel
 
 ```sql
+-- ── BANNER ───────────────────────────────────────────────────
+CREATE TABLE banner (
+  id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  foto_url   text NOT NULL,
+  urutan     integer NOT NULL DEFAULT 0,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
 -- ── TENAGA AHLI ──────────────────────────────────────────────
 CREATE TABLE tenaga_ahli (
   id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -213,6 +221,7 @@ ALTER TABLE pmb_pindahan ADD COLUMN IF NOT EXISTS program_studi  text NOT NULL D
 #### 3b. Aktifkan Row Level Security (RLS)
 
 ```sql
+ALTER TABLE banner             ENABLE ROW LEVEL SECURITY;
 ALTER TABLE tenaga_ahli        ENABLE ROW LEVEL SECURITY;
 ALTER TABLE tenaga_pendidik    ENABLE ROW LEVEL SECURITY;
 ALTER TABLE partner            ENABLE ROW LEVEL SECURITY;
@@ -226,6 +235,12 @@ ALTER TABLE pmb_pindahan       ENABLE ROW LEVEL SECURITY;
 #### 3c. Buat RLS Policies — Tabel Konten (baca publik, tulis admin)
 
 ```sql
+-- banner
+CREATE POLICY "public read banner"
+  ON banner FOR SELECT USING (true);
+CREATE POLICY "auth all banner"
+  ON banner FOR ALL USING (auth.role() = 'authenticated');
+
 -- tenaga_ahli
 CREATE POLICY "public read tenaga_ahli"
   ON tenaga_ahli FOR SELECT USING (true);
@@ -347,6 +362,7 @@ node scripts/seed-program-studi.mjs
 
 ```
 media/
+├── banner/               # gambar banner hero section
 ├── tenaga-ahli/          # foto tenaga ahli & pimpinan
 ├── tenaga-pendidik/      # foto tenaga pendidik
 ├── partner/              # logo partner (jika ada)
@@ -361,6 +377,19 @@ media/
 ---
 
 ## Skema Database Lengkap
+
+### `banner`
+
+| Kolom       | Tipe        | Null | Default              | Keterangan             |
+|-------------|-------------|------|----------------------|------------------------|
+| id          | uuid        | NO   | gen_random_uuid()    | PK                     |
+| foto_url    | text        | NO   |                      | URL dari storage media |
+| urutan      | integer     | NO   | 0                    | Urutan tampil          |
+| created_at  | timestamptz | NO   | now()                |                        |
+
+**RLS:** public SELECT, authenticated ALL
+
+---
 
 ### `tenaga_ahli`
 

@@ -1,9 +1,17 @@
 <script setup lang="ts">
-const items = [
-  // "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2086&auto=format&fit=crop",
-    "/img/banner-1.png",
-  // "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop",
-];
+const { data: banners } = await useAsyncData('banners', async () => {
+  const { data } = await useSupabasePublic()
+    .from('banner')
+    .select('foto_url')
+    .order('urutan', { ascending: true })
+  return data ?? []
+})
+
+const items = computed(() =>
+  banners.value && banners.value.length > 0
+    ? banners.value.map(b => b.foto_url)
+    : ['/img/banner-1.png']
+)
 </script>
 
 <template>

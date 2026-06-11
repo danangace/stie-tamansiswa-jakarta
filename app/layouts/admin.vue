@@ -4,6 +4,7 @@ const route = useRoute()
 
 const navItems = [
   { label: 'Dashboard', to: '/admin', icon: 'i-lucide-layout-dashboard' },
+  { label: 'Banner', to: '/admin/banner', icon: 'i-lucide-image' },
   { label: 'Tenaga Ahli & Pimpinan', to: '/admin/tenaga-ahli', icon: 'i-lucide-users' },
   { label: 'Tenaga Pendidik', to: '/admin/tenaga-pendidik', icon: 'i-lucide-graduation-cap' },
   { label: 'Partner', to: '/admin/partner', icon: 'i-lucide-handshake' },
