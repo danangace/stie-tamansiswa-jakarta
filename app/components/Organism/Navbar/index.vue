@@ -56,12 +56,10 @@ const items = computed<NavigationMenuItem[]>(() => {
     // },
 
 
-    // 🔥 MENU BARU PMB
     {
-      label: "Form PMB",
-      to: "https://forms.gle/ZJbng9btnGg6HA2B6",
-      rel: "noopener",
-      target: '_blank',
+      label: "PMB",
+      to: "/pmb",
+      active: route.path.startsWith("/pmb"),
       class: "text-base font-bold text-white bg-primary-600 px-4 py-2 rounded-lg hover:bg-primary-700 transition"
     }
   ];

@@ -1,39 +1,14 @@
 <script setup lang="ts">
-const staff = [
-  {
-    name: "Denis Kristianto, S.E., M.M.",
-    position: "Ketua STIE Taman Siswa Jakarta",
-    image: "/img/staff/ketua-stie.png",
-    greeting:
-      "Kita tidak mencetak pengikut; kita menempa pemimpin yang berani berdiri demi kebenaran",
-  },
-  {
-    name: "Joko Suyono, S.Si., M.Pd.",
-    position: "Wakil Ketua I Bid. Akademik",
-    image: "/img/staff/wk-i-stie.png",
-    greeting: "Mari Lakukan yang terbaik selagi ada kesempatan, mulai dari diri sendiri dan mulai dari sekarang",
-  },
-  {
-    name: "Tamim Ma'ruf, S.Ag., M.M.",
-    position: "Wakil Ketua II Bid. Administrasi dan Umum",
-    image: "/img/staff/wk-ii-stie.png",
-    greeting:
-      "Belajar memahami kehidupan untuk mensyukuri keadaan",
-  },
-  {
-    name: "Ir. Tukirin, M.M.",
-    position: "Ketua Program Studi Manajemen",
-    image: "/img/staff/kaprog-manajemen.png",
-    greeting:
-      "Perbaikan Terus-Menerus untuk Kemajuan Bersama",
-  },
-  {
-    name: "Ika Baskara, S.E., M.M.",
-    position: "Ketua Program Studi Akuntansi",
-    image: "/img/staff/kaprog-akuntansi.png",
-    greeting: "Akuntansi yang Profesional, Beretika, dan Berdampak untuk Kemajuan Bangsa dan Masyarakat",
-  },
-];
+const supabase = useSupabasePublic()
+
+const { data: staff, status } = await useAsyncData('tenaga-ahli-public', async () => {
+  const { data, error } = await supabase
+    .from('tenaga_ahli')
+    .select('id, nama, jabatan, foto_url, quotes')
+    .order('urutan', { ascending: true })
+  if (error) throw error
+  return data ?? []
+})
 </script>
 
 <template>
@@ -51,42 +26,56 @@ const staff = [
         </p>
       </div>
 
+      <!-- Loading -->
+      <div v-if="status === 'pending'" class="flex justify-center py-12">
+        <UIcon name="i-lucide-loader-circle" class="w-8 h-8 animate-spin text-primary-500" />
+      </div>
+
       <!-- Carousel -->
-      <UCarousel v-slot="{ item }" :items="staff" :ui="{
-        item: 'basis-full md:basis-1/2 lg:basis-1/3 p-4 flex'
-      }" indicators arrows loop :autoplay="{ delay: 3500 }" class="items-stretch">
+      <UCarousel
+        v-else-if="staff && staff.length"
+        v-slot="{ item }"
+        :items="staff"
+        :ui="{ item: 'basis-full md:basis-1/2 lg:basis-1/3 p-4 flex' }"
+        indicators
+        arrows
+        loop
+        :autoplay="{ delay: 3500 }"
+        class="items-stretch"
+      >
         <!-- Card -->
         <div
-          class="bg-white dark:bg-[#2498D3] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col group">
+          class="bg-white dark:bg-[#2498D3] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col group"
+        >
           <!-- Image -->
           <div class="relative h-72 overflow-hidden">
-            <img :src="item.image" :alt="item.name"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            <img
+              :src="item.foto_url ?? '/img/staff/placeholder.png'"
+              :alt="item.nama"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
 
           <!-- Content -->
           <div class="p-6 flex flex-col flex-1">
-
             <!-- Name -->
             <h3 class="text-lg md:text-xl font-semibold text-gray-900 dark:text-neutral-100">
-              {{ item.name }}
+              {{ item.nama }}
             </h3>
 
             <!-- Position -->
-            <p class="text-primary-600 dark:text-neutral-100 font-medium mt-1 
-                     line-clamp-2 min-h-[3rem]">
-              {{ item.position }}
+            <p class="text-primary-600 dark:text-neutral-100 font-medium mt-1 line-clamp-2 min-h-[3rem]">
+              {{ item.jabatan }}
             </p>
 
             <!-- Divider -->
-            <div class="h-px bg-gray-200 dark:bg-neutral-700 my-4"></div>
+            <div class="h-px bg-gray-200 dark:bg-neutral-700 my-4" />
 
-            <!-- Greeting -->
-            <div class="flex items-center justify-center 
-                    min-h-[4.5rem] mt-auto text-center">
-              <p v-if="item.greeting" class="text-gray-600 dark:text-neutral-400 text-sm italic line-clamp-3">
-                "{{ item.greeting }}"
+            <!-- Quotes -->
+            <div class="flex items-center justify-center min-h-[4.5rem] mt-auto text-center">
+              <p v-if="item.quotes" class="text-gray-600 dark:text-neutral-400 text-sm italic line-clamp-3">
+                "{{ item.quotes }}"
               </p>
             </div>
           </div>

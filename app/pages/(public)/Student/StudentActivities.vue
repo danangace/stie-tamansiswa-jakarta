@@ -2,73 +2,25 @@
 definePageMeta({
   title: "Kegiatan Kemahasiswaan",
   path: "/kemahasiswaan/kegiatan",
-});
+})
 
-const selectedActivity = ref<{ title: string; subtitle: string; image: string } | null>(null)
+const supabase = useSupabasePublic()
+const { data: activities } = await useAsyncData('kegiatan-mahasiswa-public', async () => {
+  const { data, error } = await supabase
+    .from('kegiatan_mahasiswa')
+    .select('id, judul, deskripsi, foto_url')
+    .order('urutan', { ascending: true })
+  if (error) throw error
+  return data ?? []
+})
+
+const selectedActivity = ref<{ judul: string; deskripsi: string | null; foto_url: string | null } | null>(null)
 const isOpen = ref(false)
 
-function openModal(activity: { title: string; subtitle: string; image: string }) {
+function openModal(activity: typeof selectedActivity.value) {
   selectedActivity.value = activity
   isOpen.value = true
 }
-
-const activities = [
-  {
-    title: "PKKMB",
-    subtitle: "Program Pengenalan Kehidupan Kampus • STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/PKKMB-STIETamanSiswaJakarta.jpeg",
-  },
-  {
-    title: "Unit Kegiatan Mahasiswa",
-    subtitle: "STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/UnitKegiatanMahasiswa-STIETamanSiswaJakarta.jpeg",
-  },
-  {
-    title: "Sosialisasi",
-    subtitle: "STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/Sosialisasi-STIETamanSiswaJakarta.jpeg",
-  },
-  {
-    title: "Pelantikan Senat",
-    subtitle: "STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/PelantikanSenat-STIETamanSiswaJakarta.jpeg",
-  },
-  {
-    title: "Zakat",
-    subtitle: "STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/Zakat-STIETamanSiswaJakarta.jpeg",
-  },
-  {
-    title: "DIES Natalis 30 Tahun",
-    subtitle: "STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/DIESNatalies30Tahun-STIETamanSiswaJakarta.jpeg",
-  },
-  {
-    title: "Buka Bersama",
-    subtitle: "STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/BukaBersama-StieTamanSiswaJakarta.jpeg",
-  },
-  {
-    title: "Jalan Santai",
-    subtitle: "STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/JalanSantai-STIETamanSiswaJakarta.jpeg",
-  },
-  {
-    title: "Hari Batik Nasional",
-    subtitle: "STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/HariBatikNasional-STIETamanSiswaJakarta.jpeg",
-  },
-  {
-    title: "17 Agustus",
-    subtitle: "STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/17Agustus-STIETamanSiswaJakarta.jpeg",
-  },
-  {
-    title: "Malam Keakraban",
-    subtitle: "STIE Tamansiswa Jakarta",
-    image: "/img/kegiatan-kemahasiswaan/MalamKeakraban-STIETamanSiswaJakarta.jpeg",
-  },
-]
 </script>
 
 <template>
@@ -92,26 +44,33 @@ const activities = [
         <!-- Grid Kegiatan -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div
-            v-for="(activity, index) in activities"
-            :key="index"
+            v-for="activity in activities"
+            :key="activity.id"
             class="group cursor-pointer"
             @click="openModal(activity)"
           >
             <!-- Foto -->
             <div class="aspect-video rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 mb-4">
-                <img
-                :src="activity.image"
-                :alt="activity.title"
+              <img
+                v-if="activity.foto_url"
+                :src="activity.foto_url"
+                :alt="activity.judul"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+              />
+              <div
+                v-else
+                class="w-full h-full flex items-center justify-center"
+              >
+                <UIcon name="i-lucide-image" class="w-12 h-12 text-gray-400" />
+              </div>
             </div>
 
             <!-- Info -->
             <h2 class="font-bold text-gray-900 dark:text-white text-lg">
-              {{ activity.title }}
+              {{ activity.judul }}
             </h2>
-            <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
-              {{ activity.subtitle }}
+            <p v-if="activity.deskripsi" class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+              {{ activity.deskripsi }}
             </p>
           </div>
         </div>
@@ -124,16 +83,17 @@ const activities = [
       <template #content>
         <div class="p-4">
           <img
-            :src="selectedActivity?.image"
-            :alt="selectedActivity?.title"
+            v-if="selectedActivity?.foto_url"
+            :src="selectedActivity.foto_url"
+            :alt="selectedActivity.judul"
             class="w-full rounded-xl object-contain max-h-[80vh]"
           />
           <div class="mt-4 text-center">
             <h2 class="font-bold text-gray-900 dark:text-white text-xl">
-              {{ selectedActivity?.title }}
+              {{ selectedActivity?.judul }}
             </h2>
-            <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
-              {{ selectedActivity?.subtitle }}
+            <p v-if="selectedActivity?.deskripsi" class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+              {{ selectedActivity.deskripsi }}
             </p>
           </div>
         </div>
