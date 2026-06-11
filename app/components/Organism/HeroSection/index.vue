@@ -15,18 +15,18 @@ const items = computed(() =>
 </script>
 
 <template>
-  <div class="relative w-full">
+  <div class="relative w-full aspect-[3/1]">
     <UCarousel
       v-slot="{ item }"
       :items="items"
-      :ui="{ item: 'basis-full' }"
-      class="h-full overflow-hidden"
+      :ui="{ root: 'h-full', viewport: 'h-full', container: 'h-full', item: 'basis-full h-full' }"
+      class="absolute inset-0"
       indicators
       :autoplay="{ delay: 5000 }"
     >
       <img
         :src="item"
-        class="w-full h-full object-cover"
+        class="w-full h-full object-cover object-center"
         draggable="false"
         alt="Hero Image"
       />

@@ -13,6 +13,8 @@ const error = ref('')
 const modalOpen = ref(false)
 const saving = ref(false)
 const selectedFile = ref<File | null>(null)
+const previewUrl = ref<string | null>(null)
+const previewConfirmed = ref(false)
 const fileError = ref('')
 
 const confirmOpen = ref(false)
@@ -42,6 +44,8 @@ async function loadData() {
 
 function openAdd() {
   selectedFile.value = null
+  previewUrl.value = null
+  previewConfirmed.value = false
   fileError.value = ''
   modalOpen.value = true
 }
@@ -50,6 +54,8 @@ function onFileChange(e: Event) {
   const input = e.target as HTMLInputElement
   const file = input.files?.[0]
   fileError.value = ''
+  previewUrl.value = null
+  previewConfirmed.value = false
   if (!file) {
     selectedFile.value = null
     return
@@ -60,6 +66,7 @@ function onFileChange(e: Event) {
     return
   }
   selectedFile.value = file
+  previewUrl.value = URL.createObjectURL(file)
 }
 
 function openDelete(item: Banner) {
@@ -68,11 +75,17 @@ function openDelete(item: Banner) {
   confirmOpen.value = true
 }
 
+function closeModal() {
+  if (previewUrl.value) URL.revokeObjectURL(previewUrl.value)
+  modalOpen.value = false
+}
+
 async function handleSave() {
   if (!selectedFile.value) return
   saving.value = true
   try {
     await create(selectedFile.value)
+    if (previewUrl.value) URL.revokeObjectURL(previewUrl.value)
     modalOpen.value = false
     await loadData()
   } catch (err: unknown) {
@@ -175,14 +188,14 @@ onMounted(loadData)
     </UCard>
 
     <!-- Modal Tambah Banner -->
-    <UModal :open="modalOpen" @update:open="modalOpen = $event">
+    <UModal :open="modalOpen" @update:open="(v) => { if (!v) closeModal() }">
       <template #content>
         <UCard>
           <template #header>
             <h3 class="font-semibold text-text-100">Tambah Banner</h3>
           </template>
 
-          <form class="flex flex-col gap-4" @submit.prevent="handleSave">
+          <div class="flex flex-col gap-4">
             <UFormField label="File Gambar" required>
               <input
                 type="file"
@@ -192,17 +205,36 @@ onMounted(loadData)
               />
             </UFormField>
             <p v-if="fileError" class="text-sm text-red-500">{{ fileError }}</p>
-          </form>
+
+            <!-- Preview 3:1 -->
+            <div v-if="previewUrl" class="flex flex-col gap-2">
+              <p class="text-sm font-medium text-text-200">Preview (rasio 3:1)</p>
+              <div class="relative w-full aspect-[3/1] rounded-lg overflow-hidden bg-neutral-100">
+                <img
+                  :src="previewUrl"
+                  class="w-full h-full object-cover object-center"
+                  alt="Preview banner"
+                />
+              </div>
+              <p class="text-xs text-text-300">
+                Gambar akan di-crop dari tengah sesuai rasio di atas.
+              </p>
+              <UCheckbox
+                v-model="previewConfirmed"
+                label="Tampilan sudah sesuai, lanjutkan simpan"
+              />
+            </div>
+          </div>
 
           <template #footer>
             <div class="flex justify-end gap-2">
-              <UButton color="neutral" variant="outline" @click="modalOpen = false">
+              <UButton color="neutral" variant="outline" @click="closeModal">
                 Batal
               </UButton>
               <UButton
                 color="primary"
                 :loading="saving"
-                :disabled="!selectedFile"
+                :disabled="!selectedFile || !previewConfirmed"
                 @click="handleSave"
               >
                 Simpan
